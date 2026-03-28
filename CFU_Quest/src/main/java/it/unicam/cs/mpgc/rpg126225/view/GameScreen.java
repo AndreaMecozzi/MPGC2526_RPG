@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg126225.view;
 
+import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,9 +11,10 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 
-public class GameScreen extends BorderPane {
+public class GameScreen extends BorderPane implements Musicabile {
     private final Font vt323Top=Font.loadFont(getClass().
             getResourceAsStream("/fonts/vt323.ttf"), 30);
     private final Font vt323button=
@@ -32,6 +34,10 @@ public class GameScreen extends BorderPane {
         musicaGioco=new MediaPlayer(musica);
         musicaGioco.setCycleCount(MediaPlayer.INDEFINITE);
         musicaGioco.setVolume(0.5);
+    }
+
+    @Override
+    public void avviaMusica() {
         musicaGioco.play();
     }
 
@@ -158,8 +164,14 @@ public class GameScreen extends BorderPane {
     }
 
     public void tornaAlMenu(){
+        this.setDisable(true);
         musicaGioco.stop();
-        MenuScreen menu=new MenuScreen();
-        this.getScene().setRoot(menu);
+        PauseTransition pausa=new PauseTransition(Duration.seconds(1));
+        pausa.setOnFinished(e -> {
+            MenuScreen menuScreen=new MenuScreen();
+            menuScreen.avviaMusica();
+            this.getScene().setRoot(menuScreen);
+        });
+        pausa.play();
     }
 }

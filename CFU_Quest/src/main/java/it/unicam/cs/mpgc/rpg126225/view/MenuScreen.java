@@ -13,7 +13,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 
 
-public class MenuScreen extends Pane {
+public class MenuScreen extends Pane implements Musicabile{
     private final Font pressStart2pTitle=
             Font.loadFont(getClass().getResourceAsStream("/fonts/pressStart2p.ttf"), 60);
 
@@ -34,6 +34,10 @@ public class MenuScreen extends Pane {
         musicaMenu=new MediaPlayer(musica);
         musicaMenu.setCycleCount(MediaPlayer.INDEFINITE);
         musicaMenu.setVolume(0.5);
+    }
+
+    @Override
+    public void avviaMusica() {
         musicaMenu.play();
     }
 
@@ -109,6 +113,7 @@ public class MenuScreen extends Pane {
     public void goGameScreen(){
         musicaMenu.stop();
         GameScreen gameScreen=new GameScreen();
-        this.getScene().setRoot(gameScreen);
+        LoadingScreen loadingScreen=new LoadingScreen(gameScreen);
+        this.getScene().setRoot(loadingScreen);
     }
 }

@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg126225;
 
+import it.unicam.cs.mpgc.rpg126225.view.LoadingScreen;
 import it.unicam.cs.mpgc.rpg126225.view.MenuScreen;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ public class CFU_Quest extends Application {
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.toFront();
+        menu.avviaMusica();
         stage.show();
     }
 }
