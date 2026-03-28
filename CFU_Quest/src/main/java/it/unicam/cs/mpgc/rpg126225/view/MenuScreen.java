@@ -43,8 +43,8 @@ public class MenuScreen extends Pane {
         ImageView logoUnicam=new ImageView();
         Image logo=new Image(getClass().getResourceAsStream("/images/logo.png"));
         logoUnicam.setImage(logo);
+        logoUnicam.setPreserveRatio(true);
         logoUnicam.setFitWidth(150);
-        logoUnicam.setFitHeight(174);
         logoUnicam.setLayoutX(325);
         logoUnicam.setLayoutY(25);
 
@@ -61,6 +61,7 @@ public class MenuScreen extends Pane {
 
         /// Creazione dei bottoni del menu
         Button newGame=creaBottone("Nuova partita");
+        newGame.setOnAction(e -> goGameScreen());
 
         Button loadGame=creaBottone("Carica partita");
 
@@ -103,5 +104,11 @@ public class MenuScreen extends Pane {
                 "-fx-text-fill: white;"));
 
         return button;
+    }
+
+    public void goGameScreen(){
+        musicaMenu.stop();
+        GameScreen gameScreen=new GameScreen();
+        this.getScene().setRoot(gameScreen);
     }
 }
