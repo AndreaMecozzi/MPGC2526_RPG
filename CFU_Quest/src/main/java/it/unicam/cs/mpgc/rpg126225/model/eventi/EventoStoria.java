@@ -9,12 +9,16 @@ import java.util.List;
  * Un evento della storia è un evento che determina il futuro del giocatore.
  */
 public class EventoStoria implements Evento {
+    private String id;
     private  String descrizione;
     private List<Opzione> scelte;
+    private TipoEvento tipoEvento;
 
-    public EventoStoria(String descrizione, List<Opzione> scelte){
+    public EventoStoria(String id,String descrizione, List<Opzione> scelte){
+        this.id = id;
         this.descrizione = descrizione;
         this.scelte = scelte;
+        this.tipoEvento=TipoEvento.STORIA;
     }
 
     @Override
@@ -30,6 +34,11 @@ public class EventoStoria implements Evento {
     @Override
     public Evento eseguiOpzione(Opzione scelta, Player p){
         return scelta.prossimoEvento();
+    }
+
+    @Override
+    public String getId() {
+        return this.id;
     }
 
 }

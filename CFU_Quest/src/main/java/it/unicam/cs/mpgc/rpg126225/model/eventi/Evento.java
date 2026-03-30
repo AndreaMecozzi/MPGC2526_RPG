@@ -13,4 +13,5 @@ public interface Evento {
     public String getStoria();
     public List<Opzione> getOpzioni();
     public Evento eseguiOpzione(Opzione opzione, Player player);
+    public String getId();
 }

@@ -80,6 +80,7 @@ public class MenuScreen extends Pane implements Musicabile{
         this.newGame.setOnAction(e -> menuScreenController.vaiAlGioco());
 
         this.loadGame=creaBottone("Carica partita");
+        this.loadGame.setOnAction(e -> menuScreenController.caricaGioco());
 
         this.exit=creaBottone("Esci");
         exit.setOnAction(e->System.exit(0)); // "Torna al desktop"

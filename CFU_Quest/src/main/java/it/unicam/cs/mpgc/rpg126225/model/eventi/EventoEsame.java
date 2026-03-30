@@ -11,20 +11,24 @@ import java.util.List;
  * allora è possibile assegnare i cfu attributi a tale esame al giocatore
  */
 public class EventoEsame implements Evento {
+    private String id;
     private String domanda;
     private List<Opzione> risposte;
     private Opzione rispostaEsatta;
     private int cfuAttributi;
     private String prossimoEsame;
+    private TipoEvento tipoEvento;
 
-    public EventoEsame(String domanda, List<Opzione> risposte,
-                       Opzione rispostaEsatta, int cfuAttributi,
-                       String prossimoEsame) {
+    public EventoEsame(String id, String domanda,
+                       List<Opzione> risposte, Opzione rispostaEsatta,
+                       int cfuAttributi, String prossimoEsame) {
+        this.id = id;
         this.domanda = domanda;
         this.risposte = risposte;
         this.rispostaEsatta = rispostaEsatta;
         this.cfuAttributi = cfuAttributi;
         this.prossimoEsame = prossimoEsame;
+        this.tipoEvento=TipoEvento.ESAME;
     }
 
 
@@ -45,5 +49,10 @@ public class EventoEsame implements Evento {
             p.cambiaProssimoEsame(this.prossimoEsame);
         }
         return rispostaScelta.prossimoEvento();
+    }
+
+    @Override
+    public String getId() {
+        return this.id;
     }
 }

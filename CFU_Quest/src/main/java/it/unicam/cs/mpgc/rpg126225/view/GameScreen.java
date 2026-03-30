@@ -39,10 +39,10 @@ public class GameScreen extends BorderPane implements Musicabile {
     private Button menuButton;
 
     public GameScreen() {
-        this.gameScreenController=new GameScreenController(this);
         this.setStyle("-fx-background-color: black;");
-        inizializzaMusica();
         inizializza();
+        inizializzaMusica();
+        this.gameScreenController=new GameScreenController(this);
     }
 
     public void inizializzaMusica(){
@@ -184,6 +184,18 @@ public class GameScreen extends BorderPane implements Musicabile {
 
     public MediaPlayer getMusicaGioco() {
         return musicaGioco;
+    }
+
+    public Label getCfuText(){
+        return this.cfuText;
+    }
+
+    public Label getProssimoEsameLabel(){
+        return this.prossimoEsameLabel;
+    }
+
+    public Label getTesto(){
+        return this.testo;
     }
 
     public Button getScelta1() {
