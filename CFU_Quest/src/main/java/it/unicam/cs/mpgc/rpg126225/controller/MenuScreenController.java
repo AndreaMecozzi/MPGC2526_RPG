@@ -22,7 +22,12 @@ public class MenuScreenController {
         menuScreen.getScene().setRoot(loadingScreen);
     }
 
-    public void caricaGioco(){
+    public void nuovaPartita(){
+        this.persistence.nuovaPartita();
+        vaiAlGioco();
+    }
+
+    public void caricaPartita(){
         try{
             persistence.caricaPartita();
             vaiAlGioco();

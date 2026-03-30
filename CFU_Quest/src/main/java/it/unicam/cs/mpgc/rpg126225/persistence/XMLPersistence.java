@@ -1,10 +1,16 @@
 package it.unicam.cs.mpgc.rpg126225.persistence;
 
 import it.unicam.cs.mpgc.rpg126225.model.GameManager;
+import it.unicam.cs.mpgc.rpg126225.model.giocatore.Player;
 import it.unicam.cs.mpgc.rpg126225.model.giocatore.Studente;
 import org.w3c.dom.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,7 +20,17 @@ public class XMLPersistence implements Persistence {
 
     @Override
     public void nuovaPartita() {
-        //TODO implementare
+        // 1. Reset del Modello con dati iniziali
+        Studente defaultPlayer = new Studente("Test", 0,
+                "Programmazione");
+        GameManager.getInstance().setPlayer(defaultPlayer);
+
+        // 2. Sovrascrittura del file fisico per resettare il progresso
+        try {
+            salvaPartita();
+        } catch (IOException e) {
+            System.err.println("Errore nel reset del salvataggio: " + e.getMessage());
+        }
     }
 
     @Override
@@ -46,7 +62,48 @@ public class XMLPersistence implements Persistence {
 
     @Override
     public void salvaPartita() throws IOException {
-        //TODO implementare
+        Player p = GameManager.getInstance().getPlayer();
+        if (p == null) return;
+
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.newDocument();
+
+            // Radice: <salvataggio>
+            Element rootElement = doc.createElement("salvataggio");
+            doc.appendChild(rootElement);
+
+            // <nome>
+            Element nome = doc.createElement("nome");
+            nome.appendChild(doc.createTextNode(p.getNome()));
+            rootElement.appendChild(nome);
+
+            // <cfu>
+            Element cfu = doc.createElement("cfu");
+            cfu.appendChild(doc.createTextNode(String.valueOf(p.cfuAccumulati())));
+            rootElement.appendChild(cfu);
+
+            // <prossimoEsame>
+            Element prossimoEsame = doc.createElement("prossimoEsame");
+            prossimoEsame.appendChild(doc.createTextNode(p.prossimoEsame()));
+            rootElement.appendChild(prossimoEsame);
+
+            // Trasformazione dell'albero DOM in file XML
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+
+            // Impostiamo l'indentazione per rendere il file leggibile
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(FILE_SALVATAGGIO));
+            transformer.transform(source, result);
+
+        } catch (Exception e) {
+            throw new IOException("Errore durante la scrittura del file XML: " + e.getMessage());
+        }
     }
 
 }
