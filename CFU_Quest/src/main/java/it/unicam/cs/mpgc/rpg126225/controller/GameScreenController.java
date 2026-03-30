@@ -34,6 +34,6 @@ public class GameScreenController {
                 this.gameManager.getPlayer().cfuAccumulati());
         this.gameScreen.getProssimoEsameLabel().setText("Prossimo esame: "+
                 this.gameManager.getPlayer().prossimoEsame());
-        //this.gameScreen.getTesto().setText(gameManager.getEventoAttuale().getStoria());
+        this.gameScreen.getTesto().setText(gameManager.getEventoAttuale().getStoria());
     }
 }

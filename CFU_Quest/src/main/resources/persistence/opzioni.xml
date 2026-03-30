@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opzioni>
+    <opzione id="OPT_001">
+        <testo>Entra in aula e segui la lezione di MPGC</testo>
+        <idProssimoEvento>EVT_LEZIONE_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_002">
+        <testo>Vai in segreteria a chiedere informazioni</testo>
+        <idProssimoEvento>EVT_SEGRETERIA_01</idProssimoEvento>
+    </opzione>
+
+    <opzione id="OPT_EX_PROG_01">
+        <testo>Un'interfaccia definisce un contratto di comportamento</testo>
+        <idProssimoEvento>EVT_POST_ESAME_WIN</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_EX_PROG_02">
+        <testo>Un'interfaccia serve solo a risparmiare memoria</testo>
+        <idProssimoEvento>EVT_POST_ESAME_LOSE</idProssimoEvento>
+    </opzione>
+</opzioni>

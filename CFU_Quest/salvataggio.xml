@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <salvataggio>
-    <nome>Test</nome>
-    <cfu>0</cfu>
+    <nome>Studente</nome>
+    <cfu>12</cfu>
     <prossimoEsame>Programmazione</prossimoEsame>
+    <idEventoAttuale>EVT_INIZIO_01</idEventoAttuale>
 </salvataggio>

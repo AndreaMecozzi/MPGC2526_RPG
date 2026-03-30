@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventi>
+    <evento id="EVT_INIZIO_01" tipo="STORIA">
+        <descrizione>Sei appena arrivato al polo informatico dell'Unicam. Il corso di MPGC sta per iniziare.</descrizione>
+        <scelte>
+            <scelta>OPT_001</scelta>
+            <scelta>OPT_002</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_ESAME_01" tipo="ESAME">
+        <descrizione>Il professore ti chiede: 'Qual è lo scopo principale di un'interfaccia in Java?'</descrizione>
+        <scelte>
+            <scelta>OPT_EX_PROG_01</scelta>
+            <scelta>OPT_EX_PROG_02</scelta>
+        </scelte>
+        <idSceltaCorretta>OPT_EX_PROG_01</idSceltaCorretta>
+        <cfu>6</cfu>
+        <prossimoEsame>Analisi Matematica</prossimoEsame>
+    </evento>
+</eventi>
