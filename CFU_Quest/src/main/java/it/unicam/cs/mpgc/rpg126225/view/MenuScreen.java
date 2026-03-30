@@ -1,5 +1,7 @@
 package it.unicam.cs.mpgc.rpg126225.view;
 
+import it.unicam.cs.mpgc.rpg126225.controller.GameScreenController;
+import it.unicam.cs.mpgc.rpg126225.controller.MenuScreenController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +16,9 @@ import javafx.scene.text.Font;
 
 
 public class MenuScreen extends Pane implements Musicabile{
+
+    private MenuScreenController menuScreenController;
+
     private final Font pressStart2pTitle=
             Font.loadFont(getClass().getResourceAsStream("/fonts/pressStart2p.ttf"), 60);
 
@@ -22,7 +27,14 @@ public class MenuScreen extends Pane implements Musicabile{
 
     private MediaPlayer musicaMenu;
 
+    private ImageView logoUnicam;
+    private Label titolo;
+    private Button newGame;
+    private Button loadGame;
+    private Button exit;
+
     public MenuScreen() {
+        this.menuScreenController = new MenuScreenController(this);
         this.setStyle("-fx-background-color: black;");
         inizializzaMusica();
         inizializza();
@@ -44,36 +56,36 @@ public class MenuScreen extends Pane implements Musicabile{
     public void inizializza(){
         /// Creazione del titolo del Menu
         // Bottone
-        ImageView logoUnicam=new ImageView();
+        this.logoUnicam=new ImageView();
         Image logo=new Image(getClass().getResourceAsStream("/images/logo.png"));
-        logoUnicam.setImage(logo);
-        logoUnicam.setPreserveRatio(true);
-        logoUnicam.setFitWidth(150);
-        logoUnicam.setLayoutX(325);
-        logoUnicam.setLayoutY(25);
+        this.logoUnicam.setImage(logo);
+        this.logoUnicam.setPreserveRatio(true);
+        this.logoUnicam.setFitWidth(150);
+        this.logoUnicam.setLayoutX(325);
+        this.logoUnicam.setLayoutY(25);
 
         // Titolo
-        Label titolo=new Label("CFU QUEST");
-        titolo.setFont(pressStart2pTitle);
-        titolo.setStyle("-fx-text-fill: white;"+"-fx-background-color: black;");
+        this.titolo=new Label("CFU QUEST");
+        this.titolo.setFont(pressStart2pTitle);
+        this.titolo.setStyle("-fx-text-fill: white;"+"-fx-background-color: black;");
 
         HBox containerTitle=new HBox(35);
-        containerTitle.getChildren().addAll(logoUnicam, titolo);
+        containerTitle.getChildren().addAll(this.logoUnicam, this.titolo);
         containerTitle.setLayoutX(25);
         containerTitle.setLayoutY(25);
         containerTitle.setAlignment(Pos.CENTER_LEFT);
 
         /// Creazione dei bottoni del menu
-        Button newGame=creaBottone("Nuova partita");
-        newGame.setOnAction(e -> goGameScreen());
+        this.newGame=creaBottone("Nuova partita");
+        this.newGame.setOnAction(e -> menuScreenController.vaiAlGioco());
 
-        Button loadGame=creaBottone("Carica partita");
+        this.loadGame=creaBottone("Carica partita");
 
-        Button exit=creaBottone("Esci");
+        this.exit=creaBottone("Esci");
         exit.setOnAction(e->System.exit(0)); // "Torna al desktop"
 
         VBox containerButtons=new VBox(20);
-        containerButtons.getChildren().addAll(newGame,loadGame,exit);
+        containerButtons.getChildren().addAll(this.newGame,this.loadGame,this.exit);
         containerButtons.setAlignment(Pos.CENTER);
         containerButtons.setPrefSize(300,300);
         containerButtons.setLayoutX(250);
@@ -110,10 +122,19 @@ public class MenuScreen extends Pane implements Musicabile{
         return button;
     }
 
-    public void goGameScreen(){
-        musicaMenu.stop();
-        GameScreen gameScreen=new GameScreen();
-        LoadingScreen loadingScreen=new LoadingScreen(gameScreen);
-        this.getScene().setRoot(loadingScreen);
+    public MediaPlayer getMusicaMenu() {
+        return musicaMenu;
+    }
+
+    public Button getNewGame() {
+        return newGame;
+    }
+
+    public Button getLoadGame() {
+        return loadGame;
+    }
+
+    public Button getExit() {
+        return exit;
     }
 }
