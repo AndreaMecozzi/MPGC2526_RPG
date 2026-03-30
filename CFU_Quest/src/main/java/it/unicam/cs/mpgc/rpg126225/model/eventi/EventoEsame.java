@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg126225.model.eventi;
 
 import it.unicam.cs.mpgc.rpg126225.model.Opzione;
 import it.unicam.cs.mpgc.rpg126225.model.giocatore.Player;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -10,12 +11,27 @@ import java.util.List;
  * da una domanda e da 4 risposte (di cui una esatta): se la risposta data è corretta,
  * allora è possibile assegnare i cfu attributi a tale esame al giocatore
  */
-public class EventoEsame implements Evento {
+
+@Entity
+@DiscriminatorValue("ESAME")
+public class EventoEsame extends EventoBase {
     private String domanda;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "evento_id")
     private List<Opzione> risposte;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "risposta_esatta_id")
     private Opzione rispostaEsatta;
+
     private int cfuAttributi;
     private String prossimoEsame;
+
+    @Enumerated(EnumType.STRING)
+    private TipoEvento tipoEvento;
+
+    public EventoEsame(){}
 
     public EventoEsame(String domanda, List<Opzione> risposte,
                        Opzione rispostaEsatta, int cfuAttributi,
@@ -25,6 +41,7 @@ public class EventoEsame implements Evento {
         this.rispostaEsatta = rispostaEsatta;
         this.cfuAttributi = cfuAttributi;
         this.prossimoEsame = prossimoEsame;
+        this.tipoEvento=TipoEvento.ESAME;
     }
 
 
@@ -44,6 +61,11 @@ public class EventoEsame implements Evento {
             p.aggiungiCfu(this.cfuAttributi);
             p.cambiaProssimoEsame(this.prossimoEsame);
         }
-        return rispostaScelta.prossimoEvento();
+        return rispostaScelta.getProssimoEvento();
+    }
+
+    @Override
+    public TipoEvento getTipo() {
+        return this.tipoEvento;
     }
 }

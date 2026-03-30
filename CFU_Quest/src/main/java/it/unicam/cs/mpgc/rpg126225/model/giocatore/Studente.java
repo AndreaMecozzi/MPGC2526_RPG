@@ -1,14 +1,25 @@
 package it.unicam.cs.mpgc.rpg126225.model.giocatore;
 
-import it.unicam.cs.mpgc.rpg126225.model.Opzione;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 /**
  * Rappresenta lo studente protagonista della storia.
  */
+@Entity
 public class Studente implements Player {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String nome;
     private int cfuAccumulati;
     private String prossimoEsame;
+
+    public Studente(){}
 
     public Studente(String nome, String prossimoEsame) {
         this.nome = nome;
@@ -19,6 +30,10 @@ public class Studente implements Player {
         this.nome = nome;
         this.cfuAccumulati = cfuAccumulati;
         this.prossimoEsame = prossimoEsame;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 
     @Override
