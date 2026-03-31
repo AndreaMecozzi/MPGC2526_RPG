@@ -38,6 +38,16 @@ public class GameManager {
     }
 
     public void eseguiTurno(Opzione opzione){
-        this.eventoAttuale= this.eventoAttuale.eseguiOpzione(opzione,player);
+        if (this.eventoAttuale == null) {
+            System.err.println("Errore: Impossibile eseguire turno su un evento nullo!");
+            return;
+        }
+        Evento prossimo = this.eventoAttuale.eseguiOpzione(opzione, player);
+
+        if (prossimo == null) {
+            System.err.println("Attenzione: L'opzione selezionata non porta a nessun evento (dead end)!");
+        }
+
+        this.eventoAttuale = prossimo;
     }
 }

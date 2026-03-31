@@ -32,10 +32,11 @@ public class GameScreen extends BorderPane implements Musicabile {
     /// Center
     private Label testo;
     /// Bottom
-    private Button scelta1;
-    private Button scelta2;
-    private Button scelta3;
-    private Button scelta4;
+    private VBox containerOpzioni;
+//    private Button scelta1;
+//    private Button scelta2;
+//    private Button scelta3;
+//    private Button scelta4;
     private Button menuButton;
 
     public GameScreen() {
@@ -123,31 +124,25 @@ public class GameScreen extends BorderPane implements Musicabile {
     }
 
     public void inizializzaBottom(){
-        this.scelta1=creaBottone("Scelta 1");
-        this.scelta2=creaBottone("Scelta 2");
-        this.scelta3=creaBottone("Scelta 3");
-        this.scelta4=creaBottone("Scelta 4");
+// 1. CREA il contenitore (non deve essere null!)
+        this.containerOpzioni = new VBox(15);
+        this.containerOpzioni.setAlignment(Pos.CENTER);
+        this.containerOpzioni.setPadding(new Insets(0, 0, 50, 0));
 
-        GridPane gridButtons=new GridPane();
-        gridButtons.setHgap(10);
-        gridButtons.setVgap(10);
-        gridButtons.setAlignment(Pos.CENTER);
-        gridButtons.add(this.scelta1,0,0);
-        gridButtons.add(this.scelta2,0,1);
-        gridButtons.add(this.scelta3,1,0);
-        gridButtons.add(this.scelta4,1,1);
+        // 2. CREA il bottone del menu
+        this.menuButton = creaBottone("Menu");
+        this.menuButton.setPrefSize(100, 40);
+        this.menuButton.setOnAction(e -> this.gameScreenController.tornaAlMenu());
 
-        gridButtons.setPadding(new Insets(0,0,100,0));
+        // 3. ORA crea il pannello e aggiungi i figli
+        StackPane bottomPane = new StackPane();
 
-        this.menuButton=creaBottone("Menu");
-        this.menuButton.setPrefSize(100,40);
-        this.menuButton.setOnAction(e->this.gameScreenController.tornaAlMenu());
+        // ATTENZIONE: Se qui metti variabili che non hai inizializzato sopra, avrai l'errore
+        bottomPane.getChildren().addAll(this.containerOpzioni, this.menuButton);
 
-        StackPane bottomPane=new StackPane();
-        bottomPane.getChildren().addAll(gridButtons,this.menuButton);
-        bottomPane.setAlignment(gridButtons,Pos.CENTER);
-        bottomPane.setAlignment(this.menuButton,Pos.BOTTOM_LEFT);
-        bottomPane.setMargin(this.menuButton,new Insets(0,0,10,10));
+        StackPane.setAlignment(this.containerOpzioni, Pos.CENTER);
+        StackPane.setAlignment(this.menuButton, Pos.BOTTOM_LEFT);
+        StackPane.setMargin(this.menuButton, new Insets(0, 0, 10, 10));
 
         this.setBottom(bottomPane);
     }
@@ -198,20 +193,24 @@ public class GameScreen extends BorderPane implements Musicabile {
         return this.testo;
     }
 
-    public Button getScelta1() {
-        return scelta1;
-    }
+//    public Button getScelta1() {
+//        return scelta1;
+//    }
+//
+//    public Button getScelta2() {
+//        return scelta2;
+//    }
+//
+//    public Button getScelta3() {
+//        return scelta3;
+//    }
+//
+//    public Button getScelta4() {
+//        return scelta4;
+//    }
 
-    public Button getScelta2() {
-        return scelta2;
-    }
-
-    public Button getScelta3() {
-        return scelta3;
-    }
-
-    public Button getScelta4() {
-        return scelta4;
+    public VBox getContainerOpzioni(){
+        return this.containerOpzioni;
     }
 
     public Button getMenuButton() {
