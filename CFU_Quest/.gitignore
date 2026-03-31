@@ -35,6 +35,9 @@ bin/
 /nbdist/
 /.nb-gradle/
 
+# Esclusione del file di salvataggio
+src/main/resources/persistence/salvataggio.xml
+
 ### VS Code ###
 .vscode/
 

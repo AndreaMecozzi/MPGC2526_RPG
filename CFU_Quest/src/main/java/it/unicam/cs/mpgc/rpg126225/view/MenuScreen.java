@@ -80,6 +80,12 @@ public class MenuScreen extends Pane implements Musicabile{
         this.newGame.setOnAction(e -> menuScreenController.nuovaPartita());
 
         this.loadGame=creaBottone("Carica partita");
+        java.io.File fileSalvataggio = new java.io.File("src/main/resources/persistence/salvataggio.xml");
+        if (!fileSalvataggio.exists()) {
+            this.loadGame.setDisable(true);
+            // Applichiamo uno stile grigio specifico per lo stato disabilitato
+            this.loadGame.setStyle("-fx-background-color: black; -fx-border-color: grey; -fx-text-fill: grey;");
+        }
         this.loadGame.setOnAction(e -> menuScreenController.caricaPartita());
 
         this.exit=creaBottone("Esci");

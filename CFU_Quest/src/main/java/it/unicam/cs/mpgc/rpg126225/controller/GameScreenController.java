@@ -35,14 +35,15 @@ public class GameScreenController {
 
     public void aggiornaDati(){
         if(this.gameManager.getEventoAttuale()==null){
-            this.gameScreen.getTesto().setText("Fine della storia");
             this.gameScreen.getContainerOpzioni().setVisible(false);
             this.gameScreen.getContainerOpzioni().setDisable(true);
         }else{
             this.gameScreen.getCfuText().setText("CFU: "+
                     this.gameManager.getPlayer().cfuAccumulati());
-            this.gameScreen.getProssimoEsameLabel().setText("Prossimo esame: "+
+            this.gameScreen.getProssimoEsameText().setText("Prossimo esame: "+
                     this.gameManager.getPlayer().prossimoEsame());
+            this.gameScreen.getPlayerText().setText("Nome: "+
+                    this.gameManager.getPlayer().getNome());
             this.gameScreen.getTesto().setText(gameManager.getEventoAttuale().getStoria());
 
             // Generazione dinamica dei bottoni

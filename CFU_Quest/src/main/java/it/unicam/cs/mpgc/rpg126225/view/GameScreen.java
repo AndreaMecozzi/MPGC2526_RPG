@@ -25,10 +25,12 @@ public class GameScreen extends BorderPane implements Musicabile {
     private MediaPlayer musicaGioco;
 
     /// Top
-    private ImageView coinCfu;
+    private ImageView cfuImage;
     private Label cfuText;
-    private ImageView libroEsame;
-    private Label prossimoEsameLabel;
+    private ImageView playerImage;
+    private Label playerText;
+    private ImageView esameImage;
+    private Label prossimoEsameText;
     /// Center
     private Label testo;
     /// Bottom
@@ -69,34 +71,45 @@ public class GameScreen extends BorderPane implements Musicabile {
 
     public void inizializzaTop(){
         // Label CFU
-        this.coinCfu=new ImageView();
+        this.cfuImage=new ImageView();
         Image coin=new Image(this.getClass().getResource("/images/coin_CFU.png").toExternalForm());
-        this.coinCfu.setImage(coin);
-        this.coinCfu.setPreserveRatio(true);
-        this.coinCfu.setFitHeight(50);
+        this.cfuImage.setImage(coin);
+        this.cfuImage.setPreserveRatio(true);
+        this.cfuImage.setFitHeight(50);
         this.cfuText=new Label("CFU: 100");
         this.cfuText.setFont(vt323Top);
         this.cfuText.setStyle("-fx-text-fill: white;");
-        HBox hbCoinCfu=new HBox();
-        hbCoinCfu.getChildren().addAll(this.coinCfu,this.cfuText);
-        hbCoinCfu.setAlignment(Pos.CENTER_LEFT);
+        HBox hbCfu=new HBox();
+        hbCfu.getChildren().addAll(this.cfuImage,this.cfuText);
+        hbCfu.setAlignment(Pos.CENTER_LEFT);
+
+        this.playerText=new Label("Nome: ");
+        this.playerText.setFont(vt323Top);
+        this.playerText.setStyle("-fx-text-fill: white;");
+        HBox hbPlayer=new HBox();
+        hbPlayer.getChildren().addAll(this.playerText);
+        hbPlayer.setAlignment(Pos.CENTER_LEFT);
+
+        HBox hbCfuNome=new HBox(100);
+        hbCfuNome.setAlignment(Pos.CENTER_LEFT);
+        hbCfuNome.getChildren().addAll(hbCfu, hbPlayer);
 
         // Label prossimo esame
-        this.libroEsame=new ImageView();
+        this.esameImage=new ImageView();
         Image libro=new Image(this.getClass().getResource("/images/libro.png").toExternalForm());
-        this.libroEsame.setImage(libro);
-        this.libroEsame.setPreserveRatio(true);
-        this.libroEsame.setFitHeight(50);
-        this.prossimoEsameLabel=new Label("Prossimo Esame: Metodologie di programmazione");
-        this.prossimoEsameLabel.setFont(vt323Top);
-        this.prossimoEsameLabel.setStyle("-fx-text-fill: white;");
+        this.esameImage.setImage(libro);
+        this.esameImage.setPreserveRatio(true);
+        this.esameImage.setFitHeight(50);
+        this.prossimoEsameText=new Label("Prossimo Esame: Metodologie di programmazione");
+        this.prossimoEsameText.setFont(vt323Top);
+        this.prossimoEsameText.setStyle("-fx-text-fill: white;");
         HBox hbLibroEsame=new HBox();
-        hbLibroEsame.getChildren().addAll(this.libroEsame,this.prossimoEsameLabel);
+        hbLibroEsame.getChildren().addAll(this.esameImage,this.prossimoEsameText);
         hbLibroEsame.setAlignment(Pos.CENTER_LEFT);
 
 
         VBox vbTop=new VBox();
-        vbTop.getChildren().addAll(hbCoinCfu, hbLibroEsame);
+        vbTop.getChildren().addAll(hbCfuNome, hbLibroEsame);
         vbTop.setPadding(new Insets(10,0,0,10));
 
         this.setTop(vbTop);
@@ -177,8 +190,12 @@ public class GameScreen extends BorderPane implements Musicabile {
         return this.cfuText;
     }
 
-    public Label getProssimoEsameLabel(){
-        return this.prossimoEsameLabel;
+    public Label getPlayerText() {
+        return this.playerText;
+    }
+
+    public Label getProssimoEsameText(){
+        return this.prossimoEsameText;
     }
 
     public Label getTesto(){
