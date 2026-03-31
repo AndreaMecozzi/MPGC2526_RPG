@@ -14,13 +14,13 @@ public class EventoEsame implements Evento {
     private String id;
     private String domanda;
     private List<Opzione> risposte;
-    private Opzione rispostaEsatta;
+    private String rispostaEsatta;
     private int cfuAttributi;
     private String prossimoEsame;
     private TipoEvento tipoEvento;
 
     public EventoEsame(String id, String domanda,
-                       List<Opzione> risposte, Opzione rispostaEsatta,
+                       List<Opzione> risposte, String rispostaEsatta,
                        int cfuAttributi, String prossimoEsame) {
         this.id = id;
         this.domanda = domanda;
@@ -43,12 +43,12 @@ public class EventoEsame implements Evento {
     }
 
     @Override
-    public Evento eseguiOpzione(Opzione rispostaScelta, Player p){
-        if(this.rispostaEsatta.equals(rispostaScelta)){
+    public String eseguiOpzione(Opzione rispostaScelta, Player p){
+        if(this.rispostaEsatta.equals(rispostaScelta.id())){
             p.aggiungiCfu(this.cfuAttributi);
             p.cambiaProssimoEsame(this.prossimoEsame);
         }
-        return rispostaScelta.prossimoEvento();
+        return rispostaScelta.idProssimoEvento();
     }
 
     @Override

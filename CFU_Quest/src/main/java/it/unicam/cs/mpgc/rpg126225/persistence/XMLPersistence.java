@@ -2,146 +2,216 @@ package it.unicam.cs.mpgc.rpg126225.persistence;
 
 import it.unicam.cs.mpgc.rpg126225.model.*;
 import it.unicam.cs.mpgc.rpg126225.model.eventi.*;
+import it.unicam.cs.mpgc.rpg126225.model.giocatore.Player;
 import it.unicam.cs.mpgc.rpg126225.model.giocatore.Studente;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.*;
 
 public class XMLPersistence implements Persistence {
 
-    private final String FILE_SALVATAGGIO = "salvataggio.xml";
     private final String PATH_STATIC = "src/main/resources/persistence/";
+    private final String FILE_SALVATAGGIO =PATH_STATIC+"salvataggio.xml";
+    private final String FILE_EVENTI=PATH_STATIC+"eventi.xml";
+    private final String FILE_OPZIONI=PATH_STATIC+"opzioni.xml";
 
-    // Mappe STATICHE per condividere la storia tra salvataggio e caricamento
-    private static final Map<String, Evento> mappaEventi = new HashMap<>();
-    private static final Map<String, Opzione> mappaOpzioni = new HashMap<>();
-    private static final Map<String, List<String>> legamiEventoOpzioni = new HashMap<>();
-    private static final Map<String, String> legamiOpzioneEvento = new HashMap<>();
-    private static final Map<String, String> testiOpzioni = new HashMap<>();
-    private static final Map<String, String> idRispostaCorrettaPerEsame = new HashMap<>();
+    private final Map<String, Evento> cacheEventi = new HashMap<>();
+
+
+    public XMLPersistence() {}
 
     @Override
     public void nuovaPartita() {
+        GameManager gm = GameManager.getInstance();
+
+        // Creazione del giocatore con i parametri iniziali richiesti
+        Player p = new Studente("Studente");
+        // Il Player parte con 0 CFU di default
+        p.aggiungiCfu(0);
+        p.cambiaProssimoEsame("Programmazione");
+        gm.setPlayer(p);
+
+        // Impostazione dell'evento iniziale (l'arrivo all'Unicam)
+        gm.setEventoAttuale(getEvento("EVT_INIZIO_01")); //
+
+        // Persistenza: rendiamo il reset permanente sul file XML
         try {
-            caricaStrutturaMondo();
-            Studente p = new Studente("Test", 0, "Analisi 1");
-            GameManager.getInstance().setPlayer(p);
-            // Imposta l'evento iniziale (il primo trovato o uno specifico)
-            GameManager.getInstance().setEventoAttuale(mappaEventi.get("EVT_INIZIO_01"));
             salvaPartita();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Errore durante la creazione del file di salvataggio: " + e.getMessage());
         }
     }
 
-    private void caricaStrutturaMondo() throws Exception {
-        if (!mappaEventi.isEmpty()) return; // Evita di ricaricare se già in memoria
-        parseOpzioni();
-        parseEventi();
-        collegaGrafo();
-    }
+    @Override
+    public void caricaPartita() throws IOException {
+        Document doc = loadDocument(FILE_SALVATAGGIO);
+        if (doc == null) throw new IOException("File di salvataggio non trovato.");
 
-    private void parseOpzioni() throws Exception {
-        Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(PATH_STATIC + "opzioni.xml"));
-        NodeList nodi = doc.getElementsByTagName("opzione");
-        for (int i = 0; i < nodi.getLength(); i++) {
-            Element el = (Element) nodi.item(i);
-            String id = el.getAttribute("id");
-            testiOpzioni.put(id, el.getElementsByTagName("testo").item(0).getTextContent());
-            legamiOpzioneEvento.put(id, el.getElementsByTagName("idProssimoEvento").item(0).getTextContent());
-        }
-    }
+        //Estrazione dati dal file salvataggio.xml
+        String nome = doc.getElementsByTagName("nome").item(0).getTextContent(); //
+        int cfu = Integer.parseInt(doc.getElementsByTagName("cfu").item(0).getTextContent()); //
+        String prossimoEsame = doc.getElementsByTagName("prossimoEsame").item(0).getTextContent(); //
+        String idEventoAttuale = doc.getElementsByTagName("idEventoAttuale").item(0).getTextContent(); //
 
-    private void parseEventi() throws Exception {
-        Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(PATH_STATIC + "eventi.xml"));
-        NodeList nodi = doc.getElementsByTagName("evento");
-        for (int i = 0; i < nodi.getLength(); i++) {
-            Element el = (Element) nodi.item(i);
-            String id = el.getAttribute("id");
-            String tipo = el.getAttribute("tipo");
-            String desc = el.getElementsByTagName("descrizione").item(0).getTextContent();
+        //Ottengo istanza Singleton del GameManager
+        GameManager gm = GameManager.getInstance();
 
-            List<String> optIds = new ArrayList<>();
-            NodeList nScelte = el.getElementsByTagName("scelta");
-            for (int j = 0; j < nScelte.getLength(); j++) optIds.add(nScelte.item(j).getTextContent());
-            legamiEventoOpzioni.put(id, optIds);
+        //Configurazione del Player
+        Player p = new Studente(nome);
+        p.aggiungiCfu(cfu); //
+        p.cambiaProssimoEsame(prossimoEsame); //
+        gm.setPlayer(p);
 
-            if (tipo.equals("STORIA")) {
-                mappaEventi.put(id, new EventoStoria(id, desc, new ArrayList<>()));
-            } else {
-                int cfu = Integer.parseInt(el.getElementsByTagName("cfu").item(0).getTextContent());
-                String prossimo = el.getElementsByTagName("prossimoEsame").item(0).getTextContent();
-                idRispostaCorrettaPerEsame.put(id, el.getElementsByTagName("idSceltaCorretta").item(0).getTextContent());
-                mappaEventi.put(id, new EventoEsame(id, desc, new ArrayList<>(), null, cfu, prossimo));
-            }
-        }
-    }
-
-    private void collegaGrafo() throws Exception {
-        // 1. Crea i Record Opzione (immutabili)
-        for (String id : testiOpzioni.keySet()) {
-            Evento prox = mappaEventi.get(legamiOpzioneEvento.get(id));
-            mappaOpzioni.put(id, new Opzione(id, testiOpzioni.get(id), prox));
-        }
-        // 2. Riempi gli Eventi e imposta risposte esatte
-        for (String idEv : mappaEventi.keySet()) {
-            Evento ev = mappaEventi.get(idEv);
-            for (String idOpt : legamiEventoOpzioni.get(idEv)) {
-                Opzione op = mappaOpzioni.get(idOpt);
-                ev.getOpzioni().add(op);
-                if (ev instanceof EventoEsame esame && idOpt.equals(idRispostaCorrettaPerEsame.get(idEv))) {
-                    Field f = EventoEsame.class.getDeclaredField("rispostaEsatta");
-                    f.setAccessible(true);
-                    f.set(esame, op);
-                }
-            }
-        }
+        //Ripristino dell'evento attuale nel GameManager
+        gm.setEventoAttuale(getEvento(idEventoAttuale));
     }
 
     @Override
     public void salvaPartita() throws IOException {
         GameManager gm = GameManager.getInstance();
-        if (gm.getPlayer() == null || gm.getEventoAttuale() == null) return;
+        Player p = gm.getPlayer();
+        Evento attuale = gm.getEventoAttuale();
 
         try {
-            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-            Element root = doc.createElement("salvataggio");
-            doc.appendChild(root);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.newDocument();
 
-            addElement(doc, root, "nome", gm.getPlayer().getNome());
-            addElement(doc, root, "cfu", String.valueOf(gm.getPlayer().cfuAccumulati()));
-            addElement(doc, root, "prossimoEsame", gm.getPlayer().prossimoEsame());
-            addElement(doc, root, "idEventoAttuale", gm.getEventoAttuale().getId());
+            // Elemento Radice
+            Element rootElement = doc.createElement("salvataggio");
+            doc.appendChild(rootElement);
 
-            Transformer t = TransformerFactory.newInstance().newTransformer();
-            t.setOutputProperty(OutputKeys.INDENT, "yes");
-            t.transform(new DOMSource(doc), new StreamResult(new File(FILE_SALVATAGGIO)));
-        } catch (Exception e) { throw new IOException(e); }
+            // Nome Player
+            Element nome = doc.createElement("nome");
+            nome.appendChild(doc.createTextNode(p.getNome()));
+            rootElement.appendChild(nome);
+
+            // CFU
+            Element cfu = doc.createElement("cfu");
+            cfu.appendChild(doc.createTextNode(String.valueOf(p.cfuAccumulati())));
+            rootElement.appendChild(cfu);
+
+            // Prossimo Esame
+            Element prossimo = doc.createElement("prossimoEsame");
+            prossimo.appendChild(doc.createTextNode(p.prossimoEsame()));
+            rootElement.appendChild(prossimo);
+
+            // ID Evento Attuale
+            Element idEvento = doc.createElement("idEventoAttuale");
+            idEvento.appendChild(doc.createTextNode(attuale.getId()));
+            rootElement.appendChild(idEvento);
+
+            // Scrittura su file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(FILE_SALVATAGGIO));
+            transformer.transform(source, result);
+
+        } catch (Exception e) {
+            throw new IOException("Errore durante il salvataggio XML: " + e.getMessage());
+        }
     }
 
     @Override
-    public void caricaPartita() throws IOException {
+    public Evento getEvento(String idEvento){
+        // 1. Controllo cache: se l'ho già caricato, lo restituisco subito
+        if (cacheEventi.containsKey(idEvento)) {
+            return cacheEventi.get(idEvento);
+        }
+
+        Document doc = loadDocument(FILE_EVENTI);
+        if (doc == null) return null;
+
+        NodeList nList = doc.getElementsByTagName("evento");
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = (Element) nList.item(i);
+
+            if (e.getAttribute("id").equals(idEvento)) {
+                String tipo = e.getAttribute("tipo");
+                String descrizione = e.getElementsByTagName("descrizione").item(0).getTextContent();
+
+                // Recupero gli ID delle opzioni (scelte)
+                List<String> idScelte = new ArrayList<>();
+                NodeList scelteNodes = e.getElementsByTagName("scelta");
+                for (int j = 0; j < scelteNodes.getLength(); j++) {
+                    idScelte.add(scelteNodes.item(j).getTextContent());
+                }
+
+                // Trasformo gli ID in oggetti Opzione usando il metodo che abbiamo scritto
+                List<Opzione> opzioni = getOpzioni(idScelte);
+
+                Evento eventoCreato;
+                if ("ESAME".equals(tipo)) {
+                    // Estrazione dati specifici per l'esame
+                    int cfu = Integer.parseInt(e.getElementsByTagName("cfu").item(0).getTextContent());
+                    String prossimoEsame = e.getElementsByTagName("prossimoEsame").item(0).getTextContent();
+                    String idCorretta = e.getElementsByTagName("idSceltaCorretta").item(0).getTextContent();
+
+                    eventoCreato = new EventoEsame(idEvento, descrizione, opzioni, idCorretta, cfu, prossimoEsame);
+                } else {
+                    eventoCreato = new EventoStoria(idEvento, descrizione, opzioni);
+                }
+
+                // Salvo in cache prima di restituire
+                cacheEventi.put(idEvento, eventoCreato);
+                return eventoCreato;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Opzione> getOpzioni(List<String> idOpzioni) {
+        List<Opzione> opzioniTrovate = new ArrayList<>();
+        Document doc = loadDocument(FILE_OPZIONI);
+        if (doc == null) return opzioniTrovate;
+
+        NodeList nList = doc.getElementsByTagName("opzione");
+
+        for (int i = 0; i < nList.getLength(); i++) {
+            Node node = nList.item(i);
+
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) node;
+                String id = eElement.getAttribute("id");
+
+                if (idOpzioni.contains(id)) {
+                    String testo = eElement.getElementsByTagName("testo").item(0).getTextContent();
+                    String idProssimoEvento = eElement.getElementsByTagName("idProssimoEvento").item(0).getTextContent();
+
+                    // Creiamo il record Opzione.
+                    opzioniTrovate.add(new Opzione(id, testo, idProssimoEvento));
+                }
+            }
+        }
+        return opzioniTrovate;
+    }
+
+    private Document loadDocument(String filePath) {
         try {
-            caricaStrutturaMondo();
-            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(FILE_SALVATAGGIO));
-            String id = doc.getElementsByTagName("idEventoAttuale").item(0).getTextContent();
-
-            GameManager.getInstance().setPlayer(new Studente(
-                    doc.getElementsByTagName("nome").item(0).getTextContent(),
-                    Integer.parseInt(doc.getElementsByTagName("cfu").item(0).getTextContent()),
-                    doc.getElementsByTagName("prossimoEsame").item(0).getTextContent()
-            ));
-            GameManager.getInstance().setEventoAttuale(mappaEventi.get(id));
-        } catch (Exception e) { throw new IOException(e); }
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(new File(filePath));
+            doc.getDocumentElement().normalize();
+            return doc;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    private void addElement(Document doc, Element root, String tag, String val) {
-        Element e = doc.createElement(tag); e.setTextContent(val); root.appendChild(e);
-    }
 }

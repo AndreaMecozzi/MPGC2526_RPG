@@ -10,6 +10,10 @@ public class Studente implements Player {
     private int cfuAccumulati;
     private String prossimoEsame;
 
+    public Studente (String nome) {
+        this.nome = nome;
+    }
+
     public Studente(String nome, String prossimoEsame) {
         this.nome = nome;
         this.prossimoEsame = prossimoEsame;

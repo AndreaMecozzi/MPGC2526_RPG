@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg126225.model;
 
 import it.unicam.cs.mpgc.rpg126225.model.eventi.Evento;
 import it.unicam.cs.mpgc.rpg126225.model.giocatore.Player;
+import it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence;
 
 /**
  * Rappresenta il gestore del gioco. È una classe singleton che si occupa di
@@ -11,6 +12,7 @@ public class GameManager {
     private static GameManager instance;
     private Player player;
     private Evento eventoAttuale;
+    private final XMLPersistence persistence=new XMLPersistence();
 
     public static GameManager getInstance(){
         if(instance == null){
@@ -42,7 +44,9 @@ public class GameManager {
             System.err.println("Errore: Impossibile eseguire turno su un evento nullo!");
             return;
         }
-        Evento prossimo = this.eventoAttuale.eseguiOpzione(opzione, player);
+
+        String idProssimoEvento=opzione.idProssimoEvento();
+        Evento prossimo = this.persistence.getEvento(idProssimoEvento);
 
         if (prossimo == null) {
             System.err.println("Attenzione: L'opzione selezionata non porta a nessun evento (dead end)!");

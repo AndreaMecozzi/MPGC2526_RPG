@@ -32,8 +32,8 @@ public class EventoStoria implements Evento {
     }
 
     @Override
-    public Evento eseguiOpzione(Opzione scelta, Player p){
-        return scelta.prossimoEvento();
+    public String eseguiOpzione(Opzione scelta, Player p){
+        return scelta.idProssimoEvento();
     }
 
     @Override

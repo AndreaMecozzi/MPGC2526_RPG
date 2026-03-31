@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg126225.controller;
 
 import it.unicam.cs.mpgc.rpg126225.model.GameManager;
 import it.unicam.cs.mpgc.rpg126225.model.Opzione;
+import it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence;
 import it.unicam.cs.mpgc.rpg126225.view.GameScreen;
 import it.unicam.cs.mpgc.rpg126225.view.MenuScreen;
 import javafx.animation.PauseTransition;
@@ -11,6 +12,7 @@ import javafx.util.Duration;
 public class GameScreenController {
     private GameScreen gameScreen;
     private GameManager gameManager;
+    private final XMLPersistence persistence=new XMLPersistence();
 
     public GameScreenController(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
@@ -43,7 +45,7 @@ public class GameScreenController {
                     this.gameManager.getPlayer().prossimoEsame());
             this.gameScreen.getTesto().setText(gameManager.getEventoAttuale().getStoria());
 
-            // PULIZIA E GENERAZIONE DINAMICA
+            // Generazione dinamica dei bottoni
             this.gameScreen.getContainerOpzioni().getChildren().clear(); // Rimuove i bottoni del vecchio evento
 
             for (Opzione o : gameManager.getEventoAttuale().getOpzioni()) {
@@ -54,7 +56,7 @@ public class GameScreenController {
                     gameManager.eseguiTurno(o);
                     // Salvataggio automatico per garantire la persistenza ad ogni passo [cite: 31]
                     try {
-                        new it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence().salvaPartita();
+                        this.persistence.salvaPartita();
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

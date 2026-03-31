@@ -8,7 +8,6 @@
         <testo>Vai in segreteria a regolarizzare le tasse</testo>
         <idProssimoEvento>EVT_SEGRETERIA_01</idProssimoEvento>
     </opzione>
-
     <opzione id="OPT_003">
         <testo>Prendi appunti meticolosi. Ti senti pronto per l'esame!</testo>
         <idProssimoEvento>EVT_ESAME_01</idProssimoEvento>
@@ -17,32 +16,12 @@
         <testo>Vai in biblioteca a studiare seriamente</testo>
         <idProssimoEvento>EVT_ESAME_01</idProssimoEvento>
     </opzione>
-
-    <opzione id="OPT_005">
-        <testo>Chiedi il libretto universitario. L'attesa è stata lunga ma utile.</testo>
-        <idProssimoEvento>EVT_INIZIO_01</idProssimoEvento>
-    </opzione>
-
     <opzione id="OPT_EX_PROG_01">
         <testo>Definisce un contratto di comportamento per le classi</testo>
-        <idProssimoEvento>EVT_POST_ESAME_WIN</idProssimoEvento>
+        <idProssimoEvento>EVT_FINALE</idProssimoEvento>
     </opzione>
     <opzione id="OPT_EX_PROG_02">
         <testo>Serve a memorizzare dati privati in modo sicuro</testo>
-        <idProssimoEvento>EVT_POST_ESAME_LOSE</idProssimoEvento>
-    </opzione>
-
-    <opzione id="OPT_006">
-        <testo>Preparati per l'esame di Analisi Matematica</testo>
-        <idProssimoEvento>EVT_ESAME_02</idProssimoEvento>
-    </opzione>
-
-    <opzione id="OPT_EX_MAT_01">
-        <testo>Il limite è 1</testo>
-        <idProssimoEvento>EVT_POST_ESAME_WIN</idProssimoEvento>
-    </opzione>
-    <opzione id="OPT_EX_MAT_02">
-        <testo>Il limite è 0</testo>
-        <idProssimoEvento>EVT_POST_ESAME_LOSE</idProssimoEvento>
+        <idProssimoEvento>EVT_INIZIO_01</idProssimoEvento>
     </opzione>
 </opzioni>

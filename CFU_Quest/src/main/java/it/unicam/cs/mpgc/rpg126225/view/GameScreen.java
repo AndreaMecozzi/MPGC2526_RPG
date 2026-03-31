@@ -33,10 +33,6 @@ public class GameScreen extends BorderPane implements Musicabile {
     private Label testo;
     /// Bottom
     private VBox containerOpzioni;
-//    private Button scelta1;
-//    private Button scelta2;
-//    private Button scelta3;
-//    private Button scelta4;
     private Button menuButton;
 
     public GameScreen() {
@@ -124,20 +120,16 @@ public class GameScreen extends BorderPane implements Musicabile {
     }
 
     public void inizializzaBottom(){
-// 1. CREA il contenitore (non deve essere null!)
         this.containerOpzioni = new VBox(15);
         this.containerOpzioni.setAlignment(Pos.CENTER);
         this.containerOpzioni.setPadding(new Insets(0, 0, 50, 0));
 
-        // 2. CREA il bottone del menu
         this.menuButton = creaBottone("Menu");
         this.menuButton.setPrefSize(100, 40);
         this.menuButton.setOnAction(e -> this.gameScreenController.tornaAlMenu());
 
-        // 3. ORA crea il pannello e aggiungi i figli
         StackPane bottomPane = new StackPane();
 
-        // ATTENZIONE: Se qui metti variabili che non hai inizializzato sopra, avrai l'errore
         bottomPane.getChildren().addAll(this.containerOpzioni, this.menuButton);
 
         StackPane.setAlignment(this.containerOpzioni, Pos.CENTER);
@@ -192,22 +184,6 @@ public class GameScreen extends BorderPane implements Musicabile {
     public Label getTesto(){
         return this.testo;
     }
-
-//    public Button getScelta1() {
-//        return scelta1;
-//    }
-//
-//    public Button getScelta2() {
-//        return scelta2;
-//    }
-//
-//    public Button getScelta3() {
-//        return scelta3;
-//    }
-//
-//    public Button getScelta4() {
-//        return scelta4;
-//    }
 
     public VBox getContainerOpzioni(){
         return this.containerOpzioni;
