@@ -76,18 +76,23 @@ public class GameScreen extends BorderPane implements Musicabile {
         this.cfuImage.setImage(coin);
         this.cfuImage.setPreserveRatio(true);
         this.cfuImage.setFitHeight(50);
-        this.cfuText=new Label("CFU: 100");
+        this.cfuText=new Label("CFU: ");
         this.cfuText.setFont(vt323Top);
         this.cfuText.setStyle("-fx-text-fill: white;");
         HBox hbCfu=new HBox();
         hbCfu.getChildren().addAll(this.cfuImage,this.cfuText);
         hbCfu.setAlignment(Pos.CENTER_LEFT);
 
+        this.playerImage=new ImageView();
+        Image player=new Image(this.getClass().getResource("/images/player.png").toExternalForm());
+        this.playerImage.setImage(player);
+        this.playerImage.setPreserveRatio(true);
+        this.playerImage.setFitHeight(50);
         this.playerText=new Label("Nome: ");
         this.playerText.setFont(vt323Top);
         this.playerText.setStyle("-fx-text-fill: white;");
         HBox hbPlayer=new HBox();
-        hbPlayer.getChildren().addAll(this.playerText);
+        hbPlayer.getChildren().addAll(this.playerImage,this.playerText);
         hbPlayer.setAlignment(Pos.CENTER_LEFT);
 
         HBox hbCfuNome=new HBox(100);

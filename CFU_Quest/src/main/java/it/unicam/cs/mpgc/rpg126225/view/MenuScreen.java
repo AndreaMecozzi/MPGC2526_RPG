@@ -1,6 +1,5 @@
 package it.unicam.cs.mpgc.rpg126225.view;
 
-import it.unicam.cs.mpgc.rpg126225.controller.GameScreenController;
 import it.unicam.cs.mpgc.rpg126225.controller.MenuScreenController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
