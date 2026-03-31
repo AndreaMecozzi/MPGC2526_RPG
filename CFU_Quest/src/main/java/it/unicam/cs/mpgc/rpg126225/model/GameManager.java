@@ -21,9 +21,7 @@ public class GameManager {
         return instance;
     }
 
-    private GameManager(){
-
-    }
+    private GameManager(){}
 
     public Player getPlayer() {
         return player;
@@ -45,7 +43,7 @@ public class GameManager {
             return;
         }
 
-        String idProssimoEvento=opzione.idProssimoEvento();
+        String idProssimoEvento = this.eventoAttuale.eseguiOpzione(opzione, player);
         Evento prossimo = this.persistence.getEvento(idProssimoEvento);
 
         if (prossimo == null) {
