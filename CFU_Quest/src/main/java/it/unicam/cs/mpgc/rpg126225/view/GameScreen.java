@@ -138,23 +138,37 @@ public class GameScreen extends BorderPane implements Musicabile {
     }
 
     public void inizializzaBottom(){
+        // 1. Container per le opzioni (centrale)
         this.containerOpzioni = new VBox(15);
         this.containerOpzioni.setAlignment(Pos.CENTER);
-        this.containerOpzioni.setPadding(new Insets(0, 0, 50, 0));
+        this.containerOpzioni.setPadding(new Insets(0, 0, 120, 0));
 
+        // 2. Bottone Menu (angolare)
         this.menuButton = creaBottone("Menu");
+        // Blocchiamo le dimensioni del Menu affinché non si allarghi
+        this.menuButton.setMinSize(100, 40);
         this.menuButton.setPrefSize(100, 40);
+        this.menuButton.setMaxSize(100, 40);
         this.menuButton.setOnAction(e -> this.gameScreenController.tornaAlMenu());
 
-        StackPane bottomPane = new StackPane();
+        // 3. StackPane per gestire gli strati
+        StackPane bottomStack = new StackPane();
 
-        bottomPane.getChildren().addAll(this.containerOpzioni, this.menuButton);
+        // Aggiungiamo i figli. Lo StackPane permette allineamenti diversi
+        // per ogni figlio senza che si spingano a vicenda.
+        bottomStack.getChildren().addAll(this.containerOpzioni, this.menuButton);
 
+        // Allineamento centrale per le opzioni
         StackPane.setAlignment(this.containerOpzioni, Pos.CENTER);
+
+        // Allineamento in basso a sinistra per il menu
         StackPane.setAlignment(this.menuButton, Pos.BOTTOM_LEFT);
+
+        // Margine per non appiccicare il tasto menu ai bordi della finestra
         StackPane.setMargin(this.menuButton, new Insets(0, 0, 10, 10));
 
-        this.setBottom(bottomPane);
+        // 4. Impostiamo il bottomStack nel BorderPane principale
+        this.setBottom(bottomStack);
     }
 
     public Button creaBottone(String testo){
@@ -164,7 +178,13 @@ public class GameScreen extends BorderPane implements Musicabile {
         button.setStyle("-fx-background-color: black;"+
                 "-fx-border-color: white;"+
                 "-fx-text-fill: white;");
-        button.setPrefSize(200,50);
+
+        // button.setPrefSize(200,50);
+
+        button.setWrapText(true);
+        button.setMaxWidth(600);
+        button.setMinWidth(200);
+        button.setAlignment(Pos.CENTER);
 
         // Animazione quando si preme il tasto
         button.setOnMousePressed(e->button.setStyle("-fx-background-color: white;"+
