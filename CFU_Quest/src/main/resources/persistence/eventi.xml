@@ -31,18 +31,10 @@
         </scelte>
         <idSceltaCorretta>OPT_EX_PROG_01</idSceltaCorretta>
         <cfu>6</cfu>
-        <prossimoEsame>Analisi Matematica</prossimoEsame>
-    </evento>
-    <evento id="EVT_ESAME_01" tipo="ESAME">
-        <descrizione>Qual è lo scopo principale di un'interfaccia in Java?</descrizione>
-        <scelte>
-            <scelta>OPT_EX_PROG_01</scelta> <scelta>OPT_EX_PROG_02</scelta> </scelte>
-        <idSceltaCorretta>OPT_EX_PROG_01</idSceltaCorretta>
-        <cfu>6</cfu>
         <prossimoEsame>Nessuno - Laureato!</prossimoEsame>
     </evento>
     <evento id="EVT_FINALE" tipo="STORIA">
-        <descrizione>CONGRATULAZIONI! Hai risposto correttamente, ottenuto i CFU e completato la tua carriera universitaria all'Unicam!</descrizione>
+        <descrizione>CONGRATULAZIONI! Hai risposto correttamente, ottenuto i CFU e completato la tua carriera universitaria ad Unicam!</descrizione>
         <scelte>
         </scelte>
     </evento>

@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg126225.controller;
 import it.unicam.cs.mpgc.rpg126225.persistence.Persistence;
 import it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence;
 import it.unicam.cs.mpgc.rpg126225.view.GameScreen;
+import it.unicam.cs.mpgc.rpg126225.view.InsertNameScreen;
 import it.unicam.cs.mpgc.rpg126225.view.LoadingScreen;
 import it.unicam.cs.mpgc.rpg126225.view.MenuScreen;
 
@@ -22,10 +23,6 @@ public class MenuScreenController {
         menuScreen.getScene().setRoot(loadingScreen);
     }
 
-    public void nuovaPartita(){
-        this.persistence.nuovaPartita();
-        vaiAlGioco();
-    }
 
     public void caricaPartita(){
         try{
@@ -34,5 +31,11 @@ public class MenuScreenController {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void chiediNome(){
+        menuScreen.getMusicaMenu().stop();
+        InsertNameScreen insertNameScreen=new InsertNameScreen();
+        menuScreen.getScene().setRoot(insertNameScreen);
     }
 }

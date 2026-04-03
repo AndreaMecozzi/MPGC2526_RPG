@@ -13,10 +13,10 @@ public class CFU_Quest extends Application {
     }
 
     public void start(Stage stage) throws Exception {
-        //MenuScreen menu=new MenuScreen();
-        //Scene scene=new Scene(menu);
-        InsertNameScreen insertNameScreen=new InsertNameScreen();
-        Scene scene=new Scene(insertNameScreen);
+        MenuScreen menu=new MenuScreen();
+        Scene scene=new Scene(menu);
+        //InsertNameScreen insertNameScreen=new InsertNameScreen();
+        //Scene scene=new Scene(insertNameScreen);
         stage.setScene(scene);
         stage.setTitle("CFU Quest");
         stage.setWidth(800);
@@ -24,7 +24,7 @@ public class CFU_Quest extends Application {
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.toFront();
-        //menu.avviaMusica();
+        menu.avviaMusica();
         stage.show();
     }
 }

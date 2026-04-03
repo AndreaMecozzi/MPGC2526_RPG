@@ -76,7 +76,7 @@ public class MenuScreen extends Pane implements Musicabile{
 
         /// Creazione dei bottoni del menu
         this.newGame=creaBottone("Nuova partita");
-        this.newGame.setOnAction(e -> menuScreenController.nuovaPartita());
+        this.newGame.setOnAction(e -> menuScreenController.chiediNome());
 
         this.loadGame=creaBottone("Carica partita");
         java.io.File fileSalvataggio = new java.io.File("src/main/resources/persistence/salvataggio.xml");

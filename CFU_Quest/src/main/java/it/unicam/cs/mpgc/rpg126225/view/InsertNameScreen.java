@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg126225.view;
 
+import it.unicam.cs.mpgc.rpg126225.controller.InsertNameScreenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class InsertNameScreen extends BorderPane {
+    private InsertNameScreenController insertNameController;
     private final Font vt323text=Font.loadFont(
             getClass().getResourceAsStream("/fonts/vt323.ttf"), 30);
 
@@ -24,6 +26,7 @@ public class InsertNameScreen extends BorderPane {
 
 
     public InsertNameScreen() {
+        this.insertNameController=new InsertNameScreenController(this);
         this.setStyle("-fx-background-color: black;");
         inizializza();
     }
@@ -61,7 +64,11 @@ public class InsertNameScreen extends BorderPane {
 
         /// Bottoni
         this.confirmButton = creaBottone("Conferma");
+        this.confirmButton.setOnAction(e->this.insertNameController.controllaNome());
+
+
         this.backButton = creaBottone("Indietro");
+        this.backButton.setOnAction(e->this.insertNameController.tornaAlMenu());
 
         HBox containerBottoni = new HBox(40); // Spazio di 40px tra i due bottoni
         containerBottoni.setAlignment(Pos.CENTER);
@@ -99,5 +106,13 @@ public class InsertNameScreen extends BorderPane {
         button.setWrapText(true);
 
         return button;
+    }
+
+    public String getPlayerName(){
+        return this.playerName.getText();
+    }
+
+    public Label getErrorLabel(){
+        return this.errorLabel;
     }
 }

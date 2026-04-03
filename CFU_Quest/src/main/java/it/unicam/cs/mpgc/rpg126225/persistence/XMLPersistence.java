@@ -33,11 +33,11 @@ public class XMLPersistence implements Persistence {
     public XMLPersistence() {}
 
     @Override
-    public void nuovaPartita() {
+    public void nuovaPartita(String playerName) {
         GameManager gm = GameManager.getInstance();
 
         // Creazione del giocatore con i parametri iniziali richiesti
-        Player p = new Studente("Studente");
+        Player p = new Studente(playerName);
         // Il Player parte con 0 CFU di default
         p.aggiungiCfu(0);
         p.cambiaProssimoEsame("Programmazione");

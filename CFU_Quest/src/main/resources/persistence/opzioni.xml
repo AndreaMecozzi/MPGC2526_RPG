@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <opzioni>
     <opzione id="OPT_001">
-        <testo>Entra in aula e segui la lezione di MPGC</testo>
+        <testo>Entra in aula</testo>
         <idProssimoEvento>EVT_LEZIONE_01</idProssimoEvento>
     </opzione>
     <opzione id="OPT_002">
-        <testo>Vai in segreteria a regolarizzare le tasse</testo>
+        <testo>Vai in segreteria</testo>
         <idProssimoEvento>EVT_SEGRETERIA_01</idProssimoEvento>
     </opzione>
     <opzione id="OPT_003">
-        <testo>Prendi appunti meticolosi. Ti senti pronto per l'esame!</testo>
+        <testo>Prendi appunti</testo>
         <idProssimoEvento>EVT_ESAME_01</idProssimoEvento>
     </opzione>
     <opzione id="OPT_004">
-        <testo>Vai in biblioteca a studiare seriamente</testo>
+        <testo>Vai in biblioteca</testo>
         <idProssimoEvento>EVT_ESAME_01</idProssimoEvento>
     </opzione>
     <opzione id="OPT_EX_PROG_01">

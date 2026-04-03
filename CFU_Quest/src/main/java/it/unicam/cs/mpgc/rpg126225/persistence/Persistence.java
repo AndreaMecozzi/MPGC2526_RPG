@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface Persistence {
-    public void nuovaPartita();
+    public void nuovaPartita(String playerName);
     public void caricaPartita() throws IOException;
     public void salvaPartita() throws IOException;
     public Evento getEvento(String idEvento);
