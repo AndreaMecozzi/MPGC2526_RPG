@@ -34,12 +34,11 @@ public class InsertNameScreenController {
     }
 
     public void controllaNome(){
-        if(this.insertNameScreen.getPlayerName().equals("")||
-        this.insertNameScreen.getPlayerName() == null||
-        this.insertNameScreen.getPlayerName().length()<4||
-        !this.insertNameScreen.getPlayerName().matches("^[a-zA-Z0-9]*$")){
-            this.insertNameScreen.getErrorLabel().setVisible(true);
-            this.insertNameScreen.getErrorLabel().setManaged(true);
+        if(this.insertNameScreen.getPlayerName() == null||
+                this.insertNameScreen.getPlayerName().length()<4||
+                !this.insertNameScreen.getPlayerName().matches("^[a-zA-Z0-9 ]*$")){
+                this.insertNameScreen.getErrorLabel().setVisible(true);
+                this.insertNameScreen.getErrorLabel().setManaged(true);
         }else{
             this.nuovaPartita(this.insertNameScreen.getPlayerName());
         }
