@@ -14,6 +14,7 @@
 
 ```bash
 git clone https://github.com/AndreaMecozzi/MPGC2526_RPG
+cd MPGC2526_RPG
 cd CFU_Quest
 ```
 
