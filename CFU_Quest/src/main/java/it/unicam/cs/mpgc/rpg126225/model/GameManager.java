@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg126225.model;
 
 import it.unicam.cs.mpgc.rpg126225.model.eventi.Evento;
 import it.unicam.cs.mpgc.rpg126225.model.giocatore.Player;
+import it.unicam.cs.mpgc.rpg126225.persistence.Persistence;
 import it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence;
 
 /**
@@ -13,7 +14,7 @@ public class GameManager {
     private static GameManager instance;
     private Player player;
     private Evento eventoAttuale;
-    private final XMLPersistence persistence = new XMLPersistence();
+    private final Persistence persistence = new XMLPersistence();
 
     /**
      * Restituisce l'istanza univoca del gestore del gioco.
