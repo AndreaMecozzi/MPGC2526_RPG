@@ -1,7 +1,5 @@
 package it.unicam.cs.mpgc.rpg126225;
 
-import it.unicam.cs.mpgc.rpg126225.view.InsertNameScreen;
-import it.unicam.cs.mpgc.rpg126225.view.LoadingScreen;
 import it.unicam.cs.mpgc.rpg126225.view.MenuScreen;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,8 +13,6 @@ public class CFU_Quest extends Application {
     public void start(Stage stage) throws Exception {
         MenuScreen menu=new MenuScreen();
         Scene scene=new Scene(menu);
-        //InsertNameScreen insertNameScreen=new InsertNameScreen();
-        //Scene scene=new Scene(insertNameScreen);
         stage.setScene(scene);
         stage.setTitle("CFU Quest");
         stage.setWidth(800);
