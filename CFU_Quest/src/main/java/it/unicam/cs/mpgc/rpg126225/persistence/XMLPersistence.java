@@ -20,33 +20,41 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Implementazione concreta dell'interfaccia Persistence basata sul formato XML.
+ *
+ * @author Andrea Mecozzi
+ */
 public class XMLPersistence implements Persistence {
 
     private final String PATH_STATIC = "src/main/resources/persistence/";
-    private final String FILE_SALVATAGGIO =PATH_STATIC+"salvataggio.xml";
-    private final String FILE_EVENTI=PATH_STATIC+"eventi.xml";
-    private final String FILE_OPZIONI=PATH_STATIC+"opzioni.xml";
+    private final String FILE_SALVATAGGIO = PATH_STATIC + "salvataggio.xml";
+    private final String FILE_EVENTI = PATH_STATIC + "eventi.xml";
+    private final String FILE_OPZIONI = PATH_STATIC + "opzioni.xml";
 
     private final Map<String, Evento> cacheEventi = new HashMap<>();
 
-
+    /**
+     * Costruttore di default.
+     */
     public XMLPersistence() {}
 
+    /**
+     * Inizializza una nuova partita resettando lo stato nel GameManager e
+     * sovrascrivendo il precedente file di salvataggio.
+     * @param playerName Il nome dello studente inserito dall'utente.
+     */
     @Override
     public void nuovaPartita(String playerName) {
         GameManager gm = GameManager.getInstance();
 
-        // Creazione del giocatore con i parametri iniziali richiesti
         Player p = new Studente(playerName);
-        // Il Player parte con 0 CFU di default
         p.aggiungiCfu(0);
         p.cambiaProssimoEsame("Programmazione");
         gm.setPlayer(p);
 
-        // Impostazione dell'evento iniziale (l'arrivo all'Unicam)
-        gm.setEventoAttuale(getEvento("EVT_INIZIO_01")); //
+        gm.setEventoAttuale(getEvento("EVT_INIZIO_01"));
 
-        // Persistenza: rendiamo il reset permanente sul file XML
         try {
             salvaPartita();
         } catch (IOException e) {
@@ -54,30 +62,37 @@ public class XMLPersistence implements Persistence {
         }
     }
 
+    /**
+     * Carica i dati dal file di salvataggio e ripristina la sessione
+     * all'interno del GameManager
+     * @throws IOException Se il file di salvataggio è mancante, illeggibile o corrotto.
+     */
     @Override
     public void caricaPartita() throws IOException {
         Document doc = loadDocument(FILE_SALVATAGGIO);
         if (doc == null) throw new IOException("File di salvataggio non trovato.");
 
-        //Estrazione dati dal file salvataggio.xml
-        String nome = doc.getElementsByTagName("nome").item(0).getTextContent(); //
-        int cfu = Integer.parseInt(doc.getElementsByTagName("cfu").item(0).getTextContent()); //
-        String prossimoEsame = doc.getElementsByTagName("prossimoEsame").item(0).getTextContent(); //
-        String idEventoAttuale = doc.getElementsByTagName("idEventoAttuale").item(0).getTextContent(); //
+        String nome = doc.getElementsByTagName("nome").item(0).getTextContent();
+        int cfu = Integer.parseInt(doc.getElementsByTagName("cfu").item(0).getTextContent());
+        String prossimoEsame = doc.getElementsByTagName("prossimoEsame").item(0).getTextContent();
+        String idEventoAttuale = doc.getElementsByTagName("idEventoAttuale").item(0).getTextContent();
 
-        //Ottengo istanza Singleton del GameManager
         GameManager gm = GameManager.getInstance();
 
-        //Configurazione del Player
         Player p = new Studente(nome);
-        p.aggiungiCfu(cfu); //
-        p.cambiaProssimoEsame(prossimoEsame); //
+        p.aggiungiCfu(cfu);
+        p.cambiaProssimoEsame(prossimoEsame);
         gm.setPlayer(p);
 
-        //Ripristino dell'evento attuale nel GameManager
         gm.setEventoAttuale(getEvento(idEventoAttuale));
     }
 
+    /**
+     * Serializza l'attuale stato del GameManager in formato XML per il salvataggio
+     * della partita
+     * @throws IOException Se si verificano errori nei permessi di scrittura o durante
+     * la trasformazione dell'albero DOM.
+     */
     @Override
     public void salvaPartita() throws IOException {
         GameManager gm = GameManager.getInstance();
@@ -89,31 +104,25 @@ public class XMLPersistence implements Persistence {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
 
-            // Elemento Radice
             Element rootElement = doc.createElement("salvataggio");
             doc.appendChild(rootElement);
 
-            // Nome Player
             Element nome = doc.createElement("nome");
             nome.appendChild(doc.createTextNode(p.getNome()));
             rootElement.appendChild(nome);
 
-            // CFU
             Element cfu = doc.createElement("cfu");
             cfu.appendChild(doc.createTextNode(String.valueOf(p.cfuAccumulati())));
             rootElement.appendChild(cfu);
 
-            // Prossimo Esame
             Element prossimo = doc.createElement("prossimoEsame");
             prossimo.appendChild(doc.createTextNode(p.prossimoEsame()));
             rootElement.appendChild(prossimo);
 
-            // ID Evento Attuale
             Element idEvento = doc.createElement("idEventoAttuale");
             idEvento.appendChild(doc.createTextNode(attuale.getId()));
             rootElement.appendChild(idEvento);
 
-            // Scrittura su file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -126,9 +135,13 @@ public class XMLPersistence implements Persistence {
         }
     }
 
+    /**
+     * Recupera l'oggetto Evento
+     * @param idEvento La stringa univoca che identifica l'evento da caricare.
+     * @return L'oggetto Evento pienamente popolato con le relative opzioni, null altrimenti
+     */
     @Override
     public Evento getEvento(String idEvento){
-        // 1. Controllo cache: se l'ho già caricato, lo restituisco subito
         if (cacheEventi.containsKey(idEvento)) {
             return cacheEventi.get(idEvento);
         }
@@ -144,19 +157,16 @@ public class XMLPersistence implements Persistence {
                 String tipo = e.getAttribute("tipo");
                 String descrizione = e.getElementsByTagName("descrizione").item(0).getTextContent();
 
-                // Recupero gli ID delle opzioni (scelte)
                 List<String> idScelte = new ArrayList<>();
                 NodeList scelteNodes = e.getElementsByTagName("scelta");
                 for (int j = 0; j < scelteNodes.getLength(); j++) {
                     idScelte.add(scelteNodes.item(j).getTextContent());
                 }
 
-                // Trasformo gli ID in oggetti Opzione usando il metodo che abbiamo scritto
                 List<Opzione> opzioni = getOpzioni(idScelte);
 
                 Evento eventoCreato;
                 if ("ESAME".equals(tipo)) {
-                    // Estrazione dati specifici per l'esame
                     int cfu = Integer.parseInt(e.getElementsByTagName("cfu").item(0).getTextContent());
                     String prossimoEsame = e.getElementsByTagName("prossimoEsame").item(0).getTextContent();
                     String idCorretta = e.getElementsByTagName("idSceltaCorretta").item(0).getTextContent();
@@ -166,7 +176,6 @@ public class XMLPersistence implements Persistence {
                     eventoCreato = new EventoStoria(idEvento, descrizione, opzioni);
                 }
 
-                // Salvo in cache prima di restituire
                 cacheEventi.put(idEvento, eventoCreato);
                 return eventoCreato;
             }
@@ -174,6 +183,11 @@ public class XMLPersistence implements Persistence {
         return null;
     }
 
+    /**
+     * Recupera una lista di Opzione associate ad un determinato evento.
+     * @param idOpzioni La lista degli identificativi delle scelte da recuperare.
+     * @return Una lista di Opzione estratti dal file XML.
+     */
     @Override
     public List<Opzione> getOpzioni(List<String> idOpzioni) {
         List<Opzione> opzioniTrovate = new ArrayList<>();
@@ -193,7 +207,6 @@ public class XMLPersistence implements Persistence {
                     String testo = eElement.getElementsByTagName("testo").item(0).getTextContent();
                     String idProssimoEvento = eElement.getElementsByTagName("idProssimoEvento").item(0).getTextContent();
 
-                    // Creiamo il record Opzione.
                     opzioniTrovate.add(new Opzione(id, testo, idProssimoEvento));
                 }
             }
@@ -201,6 +214,11 @@ public class XMLPersistence implements Persistence {
         return opzioniTrovate;
     }
 
+    /**
+     * Metodo di supporto privato per caricare in memoria l'albero DOM di un file XML.
+     * @param filePath Il percorso relativo del file da processare.
+     * @return Il documento XML istanziato, null altrimenti
+     */
     private Document loadDocument(String filePath) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -213,5 +231,4 @@ public class XMLPersistence implements Persistence {
             return null;
         }
     }
-
 }
