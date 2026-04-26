@@ -1,27 +1,246 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <opzioni>
+    <!-- OPZIONI FASE 1 -->
     <opzione id="OPT_001">
-        <testo>Entra in aula</testo>
+        <testo>Entra nell'aula di Informatica</testo>
         <idProssimoEvento>EVT_LEZIONE_01</idProssimoEvento>
     </opzione>
     <opzione id="OPT_002">
-        <testo>Vai in segreteria</testo>
+        <testo>Vai in segreteria studenti</testo>
         <idProssimoEvento>EVT_SEGRETERIA_01</idProssimoEvento>
     </opzione>
     <opzione id="OPT_003">
-        <testo>Prendi appunti</testo>
-        <idProssimoEvento>EVT_ESAME_01</idProssimoEvento>
+        <testo>Prendi appunti con attenzione</testo>
+        <idProssimoEvento>EVT_STUDIO_01</idProssimoEvento>
     </opzione>
     <opzione id="OPT_004">
-        <testo>Vai in biblioteca</testo>
+        <testo>Vai a studiare in biblioteca</testo>
+        <idProssimoEvento>EVT_BIBLIOTECA_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_005">
+        <testo>Vai al bar per un caffè veloce</testo>
+        <idProssimoEvento>EVT_BAR_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_006">
+        <testo>Esplora il campus universitario</testo>
+        <idProssimoEvento>EVT_CAMPUS_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_007">
+        <testo>Torna verso l'aula</testo>
+        <idProssimoEvento>EVT_LEZIONE_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_008">
+        <testo>Fai amicizia con altri studenti</testo>
+        <idProssimoEvento>EVT_STUDIO_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_009">
+        <testo>Cerca un posto in biblioteca</testo>
+        <idProssimoEvento>EVT_BIBLIOTECA_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_010">
+        <testo>Torna all'ingresso principale</testo>
+        <idProssimoEvento>EVT_INIZIO_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_011">
+        <testo>Fai una domanda al professore</testo>
+        <idProssimoEvento>EVT_DOMANDA_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_012">
+        <testo>Ripassa i Design Pattern</testo>
         <idProssimoEvento>EVT_ESAME_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_013">
+        <testo>Studia le Interfacce e l'Astrazione</testo>
+        <idProssimoEvento>EVT_ESAME_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_014">
+        <testo>Ripassa con un compagno di corso</testo>
+        <idProssimoEvento>EVT_ESAME_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_015">
+        <testo>Prendi appunti su quanto appena detto</testo>
+        <idProssimoEvento>EVT_STUDIO_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_016">
+        <testo>Vai in biblioteca per approfondire</testo>
+        <idProssimoEvento>EVT_BIBLIOTECA_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_017">
+        <testo>Studia sodo per l'esame</testo>
+        <idProssimoEvento>EVT_STUDIO_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_018">
+        <testo>Torna in aula per seguire la lezione</testo>
+        <idProssimoEvento>EVT_LEZIONE_01</idProssimoEvento>
+    </opzione>
+
+    <!-- OPZIONI FASE 2 (Esame 1: Corretta in 3ª posizione) -->
+    <opzione id="OPT_EX_PROG_02">
+        <testo>Serve a memorizzare dati privati in modo sicuro</testo>
+        <idProssimoEvento>EVT_FAIL_PROG</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_EX_PROG_03">
+        <testo>Serve per creare istanze dirette di oggetti</testo>
+        <idProssimoEvento>EVT_FAIL_PROG</idProssimoEvento>
     </opzione>
     <opzione id="OPT_EX_PROG_01">
         <testo>Definisce un contratto di comportamento per le classi</testo>
+        <idProssimoEvento>EVT_POST_ESAME_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_EX_PROG_04">
+        <testo>Serve per gestire la memoria dinamicamente</testo>
+        <idProssimoEvento>EVT_FAIL_PROG</idProssimoEvento>
+    </opzione>
+
+    <opzione id="OPT_021">
+        <testo>Vai subito in laboratorio</testo>
+        <idProssimoEvento>EVT_LAB_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_022">
+        <testo>Cerca i compagni per il gruppo</testo>
+        <idProssimoEvento>EVT_GRUPPO_01</idProssimoEvento>
+    </opzione>
+
+    <!-- OPZIONI FASE 3 -->
+    <opzione id="OPT_023">
+        <testo>Usa i design pattern visti a lezione</testo>
+        <idProssimoEvento>EVT_STUDIO_02</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_024">
+        <testo>Chiedi aiuto al tutor del laboratorio</testo>
+        <idProssimoEvento>EVT_STUDIO_02</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_025">
+        <testo>Lavora fino a tardi per finire tutto</testo>
+        <idProssimoEvento>EVT_STUDIO_02</idProssimoEvento>
+    </opzione>
+
+    <opzione id="OPT_026">
+        <testo>Proponi un'architettura a microservizi</testo>
+        <idProssimoEvento>EVT_STUDIO_02</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_027">
+        <testo>Ascolta le proposte degli altri</testo>
+        <idProssimoEvento>EVT_LAB_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_028">
+        <testo>Dividi i compiti equamente</testo>
+        <idProssimoEvento>EVT_LAB_01</idProssimoEvento>
+    </opzione>
+
+    <!-- OPZIONI FASE 4 (Esame 2: Corretta in 2ª posizione) -->
+    <opzione id="OPT_029">
+        <testo>Ripassa il polimorfismo e l'ereditarietà</testo>
+        <idProssimoEvento>EVT_ESAME_02</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_030">
+        <testo>Analizza casi di studio reali</testo>
+        <idProssimoEvento>EVT_ESAME_02</idProssimoEvento>
+    </opzione>
+
+    <opzione id="OPT_EX_MPGC_02">
+        <testo>L'utilizzo di più file sorgente per un progetto</testo>
+        <idProssimoEvento>EVT_FAIL_MPGC</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_EX_MPGC_01">
+        <testo>Capacità di un oggetto di assumere più forme</testo>
+        <idProssimoEvento>EVT_POST_ESAME_02</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_EX_MPGC_03">
+        <testo>La creazione di più istanze della stessa classe</testo>
+        <idProssimoEvento>EVT_FAIL_MPGC</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_EX_MPGC_04">
+        <testo>La possibilità di ereditare da più classi contemporaneamente</testo>
+        <idProssimoEvento>EVT_FAIL_MPGC</idProssimoEvento>
+    </opzione>
+
+    <opzione id="OPT_031">
+        <testo>Inizia a studiare SQL</testo>
+        <idProssimoEvento>EVT_BASI_DATI_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_032">
+        <testo>Riposa un po' prima del prossimo scoglio</testo>
+        <idProssimoEvento>EVT_BASI_DATI_01</idProssimoEvento>
+    </opzione>
+
+    <!-- OPZIONI FASE 5 (Esame 3: Corretta in 4ª posizione) -->
+    <opzione id="OPT_033">
+        <testo>Studia le Forme Normali</testo>
+        <idProssimoEvento>EVT_ESAME_03</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_034">
+        <testo>Esercitati con le Query SQL</testo>
+        <idProssimoEvento>EVT_ESAME_03</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_035">
+        <testo>Analizza l'integrità referenziale</testo>
+        <idProssimoEvento>EVT_ESAME_03</idProssimoEvento>
+    </opzione>
+
+    <opzione id="OPT_EX_DB_02">
+        <testo>Serve per velocizzare le ricerche nel database</testo>
+        <idProssimoEvento>EVT_FAIL_DB</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_EX_DB_03">
+        <testo>Collega due tabelle diverse tra loro</testo>
+        <idProssimoEvento>EVT_FAIL_DB</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_EX_DB_04">
+        <testo>Permette di eliminare i dati duplicati</testo>
+        <idProssimoEvento>EVT_FAIL_DB</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_EX_DB_01">
+        <testo>Identifica univocamente ogni riga di una tabella</testo>
+        <idProssimoEvento>EVT_TESI_01</idProssimoEvento>
+    </opzione>
+
+    <!-- OPZIONI FASE 6 (Tesi: Corretta in 1ª posizione) -->
+    <opzione id="OPT_036">
+        <testo>Tesi in Intelligenza Artificiale</testo>
+        <idProssimoEvento>EVT_DISCUSSIONE_TESI</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_037">
+        <testo>Tesi in Sviluppo Web Moderno</testo>
+        <idProssimoEvento>EVT_DISCUSSIONE_TESI</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_038">
+        <testo>Tesi in Cybersecurity</testo>
+        <idProssimoEvento>EVT_DISCUSSIONE_TESI</idProssimoEvento>
+    </opzione>
+
+    <opzione id="OPT_039">
+        <testo>Presenta il tuo lavoro con sicurezza e professionalità</testo>
         <idProssimoEvento>EVT_FINALE</idProssimoEvento>
     </opzione>
-    <opzione id="OPT_EX_PROG_02">
-        <testo>Serve a memorizzare dati privati in modo sicuro</testo>
-        <idProssimoEvento>EVT_INIZIO_01</idProssimoEvento>
+    <opzione id="OPT_040">
+        <testo>Dimentichi una parte fondamentale della presentazione</testo>
+        <idProssimoEvento>EVT_FAIL_TESI</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_041">
+        <testo>Non sai rispondere a una domanda critica del correlatore</testo>
+        <idProssimoEvento>EVT_FAIL_TESI</idProssimoEvento>
+    </opzione>
+
+    <!-- OPZIONI DI RITORNO DOPO FALLIMENTO -->
+    <opzione id="OPT_FAIL_01">
+        <testo>Torna a studiare i concetti base</testo>
+        <idProssimoEvento>EVT_STUDIO_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_FAIL_02">
+        <testo>Rivedi la teoria sul polimorfismo</testo>
+        <idProssimoEvento>EVT_STUDIO_02</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_FAIL_03">
+        <testo>Approfondisci il modello relazionale</testo>
+        <idProssimoEvento>EVT_BASI_DATI_01</idProssimoEvento>
+    </opzione>
+    <opzione id="OPT_FAIL_04">
+        <testo>Rivedi la presentazione della tesi</testo>
+        <idProssimoEvento>EVT_TESI_01</idProssimoEvento>
     </opzione>
 </opzioni>
+
+
+
+

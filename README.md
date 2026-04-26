@@ -40,12 +40,13 @@ Per lo sviluppo di **CFU Quest** è stato utilizzato **Gemini (Google AI)** come
 *   **Approfondimento Concettuale:** Utilizzo dell'AI per comprendere meglio i principi della **persistenza dei dati** (salvataggio dello stato del gioco) e il funzionamento del framework **JavaFX**.
 *   **Sviluppo dell'Interfaccia Grafica:** Supporto nella scrittura e nell'ottimizzazione del codice **CSS** per lo styling dei componenti (bottoni, label, sfondi) e nella gestione dei layout dinamici per garantire una corretta visualizzazione degli elementi.
 *   **Ottimizzazione del Codice:** Suggerimenti su come utilizzare al meglio le classi standard di Java per rendere il codice più pulito e performante.
+*   **Generazione di Eventi e Scelte:** Supporto nella creazione e diversificazione degli eventi di gioco e delle relative opzioni di scelta, per arricchire il comparto narrativo e le possibilità d'interazione.
 
 ### Intervento Personale e Comprensione:
 
 L'AI è stata utilizzata esclusivamente come **strumento di tutoraggio e supporto**:
 *   Ogni soluzione proposta è stata attentamente analizzata per comprenderne la logica prima dell'integrazione nel sorgente.
-*   Il design del gioco, la struttura delle scene e la narrazione dell'RPG sono stati ideati e implementati integralmente da me.
+*   Il design del gioco, la struttura delle scene e la narrazione principale dell'RPG sono stati ideati e implementati integralmente da me, avvalendomi dell'AI per l'espansione e la varietà dei contenuti interni (eventi e scelte).
 *   L'integrazione tra la logica di gioco e l'interfaccia grafica è stata gestita manualmente per assicurare che il flusso dell'avventura rispecchiasse l'idea creativa originale.
 
 ---

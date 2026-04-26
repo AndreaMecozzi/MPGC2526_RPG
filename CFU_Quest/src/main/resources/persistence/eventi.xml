@@ -1,41 +1,223 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eventi>
+    <!-- FASE 1: INIZIO E PRIMO IMPATTO -->
     <evento id="EVT_INIZIO_01" tipo="STORIA">
-        <descrizione>Sei appena arrivato al polo informatico dell'Unicam. Il corso di MPGC sta per iniziare.</descrizione>
+        <descrizione>Sei appena arrivato al polo informatico dell'Unicam. Il corso di MPGC sta per iniziare. Cosa decidi di fare?</descrizione>
         <scelte>
             <scelta>OPT_001</scelta>
             <scelta>OPT_002</scelta>
+            <scelta>OPT_005</scelta>
+            <scelta>OPT_006</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_BAR_01" tipo="STORIA">
+        <descrizione>Il bar è pieno di studenti. L'odore di caffè è invitante, ma la lezione sta per iniziare.</descrizione>
+        <scelte>
+            <scelta>OPT_007</scelta>
+            <scelta>OPT_008</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_CAMPUS_01" tipo="STORIA">
+        <descrizione>Il campus di Camerino è bellissimo oggi. C'è un'aria frizzante e molta tranquillità.</descrizione>
+        <scelte>
+            <scelta>OPT_009</scelta>
+            <scelta>OPT_010</scelta>
         </scelte>
     </evento>
 
     <evento id="EVT_LEZIONE_01" tipo="STORIA">
-        <descrizione>L'aula è gremita. Il professore spiega i pattern. Cosa fai?</descrizione>
+        <descrizione>L'aula è gremita. Il professore spiega i pattern e l'importanza del clean code. Cosa fai?</descrizione>
         <scelte>
             <scelta>OPT_003</scelta>
             <scelta>OPT_004</scelta>
+            <scelta>OPT_011</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_DOMANDA_01" tipo="STORIA">
+        <descrizione>Il professore sorride alla tua domanda e approfondisce l'argomento. Hai imparato qualcosa di nuovo!</descrizione>
+        <scelte>
+            <scelta>OPT_015</scelta>
+            <scelta>OPT_016</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_BIBLIOTECA_01" tipo="STORIA">
+        <descrizione>In biblioteca regna il silenzio. È il posto perfetto per concentrarsi seriamente.</descrizione>
+        <scelte>
+            <scelta>OPT_017</scelta>
+            <scelta>OPT_018</scelta>
         </scelte>
     </evento>
 
     <evento id="EVT_SEGRETERIA_01" tipo="STORIA">
-        <descrizione>In segreteria risolvi i problemi burocratici. Ora puoi solo andare a lezione.</descrizione>
+        <descrizione>In segreteria risolvi i problemi burocratici. Ora puoi finalmente dedicarti allo studio.</descrizione>
         <scelte>
             <scelta>OPT_001</scelta>
         </scelte>
     </evento>
 
+    <!-- FASE 2: PRIMO ESAME -->
+    <evento id="EVT_STUDIO_01" tipo="STORIA">
+        <descrizione>Ti prepari per l'esame di Programmazione. Su cosa ti concentri maggiormente?</descrizione>
+        <scelte>
+            <scelta>OPT_012</scelta>
+            <scelta>OPT_013</scelta>
+            <scelta>OPT_014</scelta>
+        </scelte>
+    </evento>
+
     <evento id="EVT_ESAME_01" tipo="ESAME">
-        <descrizione>Qual è lo scopo principale di un'interfaccia in Java?</descrizione>
+        <descrizione>Primo esame: Qual è lo scopo principale di un'interfaccia in Java?</descrizione>
         <scelte>
             <scelta>OPT_EX_PROG_01</scelta>
             <scelta>OPT_EX_PROG_02</scelta>
+            <scelta>OPT_EX_PROG_03</scelta>
+            <scelta>OPT_EX_PROG_04</scelta>
         </scelte>
         <idSceltaCorretta>OPT_EX_PROG_01</idSceltaCorretta>
         <cfu>6</cfu>
-        <prossimoEsame>Nessuno - Laureato!</prossimoEsame>
+        <prossimoEsame>Progetto di Laboratorio</prossimoEsame>
     </evento>
+
+    <evento id="EVT_POST_ESAME_01" tipo="STORIA">
+        <descrizione>Hai superato il primo scoglio! Ma non c'è tempo per riposare, inizia il laboratorio.</descrizione>
+        <scelte>
+            <scelta>OPT_021</scelta>
+            <scelta>OPT_022</scelta>
+        </scelte>
+    </evento>
+
+    <!-- FASE 3: LABORATORIO E LAVORO DI GRUPPO -->
+    <evento id="EVT_LAB_01" tipo="STORIA">
+        <descrizione>In laboratorio devi implementare un sistema complesso. Come procedi?</descrizione>
+        <scelte>
+            <scelta>OPT_023</scelta>
+            <scelta>OPT_024</scelta>
+            <scelta>OPT_025</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_GRUPPO_01" tipo="STORIA">
+        <descrizione>Ti trovi con i tuoi compagni per il progetto di gruppo. Ci sono diverse opinioni sull'architettura.</descrizione>
+        <scelte>
+            <scelta>OPT_026</scelta>
+            <scelta>OPT_027</scelta>
+            <scelta>OPT_028</scelta>
+        </scelte>
+    </evento>
+
+    <!-- FASE 4: SECONDO ESAME -->
+    <evento id="EVT_STUDIO_02" tipo="STORIA">
+        <descrizione>È ora di prepararsi per Metodologie di Programmazione. È un esame tosto!</descrizione>
+        <scelte>
+            <scelta>OPT_029</scelta>
+            <scelta>OPT_030</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_ESAME_02" tipo="ESAME">
+        <descrizione>Secondo esame: Cos'è il Polimorfismo in Java?</descrizione>
+        <scelte>
+            <scelta>OPT_EX_MPGC_01</scelta>
+            <scelta>OPT_EX_MPGC_02</scelta>
+            <scelta>OPT_EX_MPGC_03</scelta>
+            <scelta>OPT_EX_MPGC_04</scelta>
+        </scelte>
+        <idSceltaCorretta>OPT_EX_MPGC_01</idSceltaCorretta>
+        <cfu>6</cfu>
+        <prossimoEsame>Basi di Dati</prossimoEsame>
+    </evento>
+
+    <evento id="EVT_POST_ESAME_02" tipo="STORIA">
+        <descrizione>Ottimo lavoro! Metà del percorso è fatta. Ora ti aspetta il mondo dei dati.</descrizione>
+        <scelte>
+            <scelta>OPT_031</scelta>
+            <scelta>OPT_032</scelta>
+        </scelte>
+    </evento>
+
+    <!-- FASE 5: BASI DI DATI -->
+    <evento id="EVT_BASI_DATI_01" tipo="STORIA">
+        <descrizione>Stai studiando il modello relazionale e l'algebra relazionale. Cosa approfondisci?</descrizione>
+        <scelte>
+            <scelta>OPT_033</scelta>
+            <scelta>OPT_034</scelta>
+            <scelta>OPT_035</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_ESAME_03" tipo="ESAME">
+        <descrizione>Terzo esame: Qual è la funzione principale di una Primary Key?</descrizione>
+        <scelte>
+            <scelta>OPT_EX_DB_01</scelta>
+            <scelta>OPT_EX_DB_02</scelta>
+            <scelta>OPT_EX_DB_03</scelta>
+            <scelta>OPT_EX_DB_04</scelta>
+        </scelte>
+        <idSceltaCorretta>OPT_EX_DB_01</idSceltaCorretta>
+        <cfu>6</cfu>
+        <prossimoEsame>Preparazione Tesi</prossimoEsame>
+    </evento>
+
+    <!-- FASE 6: TESI E FINALE -->
+    <evento id="EVT_TESI_01" tipo="STORIA">
+        <descrizione>È il momento di scegliere l'argomento della tesi. Cosa ti appassiona di più?</descrizione>
+        <scelte>
+            <scelta>OPT_036</scelta>
+            <scelta>OPT_037</scelta>
+            <scelta>OPT_038</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_DISCUSSIONE_TESI" tipo="ESAME">
+        <descrizione>Sei davanti alla commissione. Il cuore batte forte. Inizi la presentazione esponendo i risultati della tua tesi. Come concludi il discorso?</descrizione>
+        <scelte>
+            <scelta>OPT_039</scelta>
+            <scelta>OPT_040</scelta>
+            <scelta>OPT_041</scelta>
+        </scelte>
+        <idSceltaCorretta>OPT_039</idSceltaCorretta>
+        <cfu>162</cfu>
+        <prossimoEsame>Laureato!</prossimoEsame>
+    </evento>
+
+    <!-- EVENTI DI FALLIMENTO (FEEDBACK ERRORI) -->
+    <evento id="EVT_FAIL_PROG" tipo="STORIA">
+        <descrizione>Risposta sbagliata! Il professore scuote la testa. Non hai ancora compreso bene i concetti base di Java. Devi tornare a studiare.</descrizione>
+        <scelte>
+            <scelta>OPT_FAIL_01</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_FAIL_MPGC" tipo="STORIA">
+        <descrizione>Risposta errata! Il concetto di polimorfismo è fondamentale e non l'hai centrato. La commissione ti invita a ripresentarti al prossimo appello.</descrizione>
+        <scelte>
+            <scelta>OPT_FAIL_02</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_FAIL_DB" tipo="STORIA">
+        <descrizione>Errore grave! Senza comprendere le chiavi primarie non puoi gestire un database. Torna sui libri e ripassa la teoria.</descrizione>
+        <scelte>
+            <scelta>OPT_FAIL_03</scelta>
+        </scelte>
+    </evento>
+
+    <evento id="EVT_FAIL_TESI" tipo="STORIA">
+        <descrizione>La discussione non è andata come speravi. La commissione ha trovato delle lacune nella tua presentazione. Devi rivedere il tuo lavoro.</descrizione>
+        <scelte>
+            <scelta>OPT_FAIL_04</scelta>
+        </scelte>
+    </evento>
+
     <evento id="EVT_FINALE" tipo="STORIA">
-        <descrizione>CONGRATULAZIONI! Hai risposto correttamente, ottenuto i CFU e completato la tua carriera universitaria ad Unicam!</descrizione>
+        <descrizione>CONGRATULAZIONI DOTTORE! Hai completato brillantemente il tuo percorso ad Unicam. Il futuro ti aspetta!</descrizione>
         <scelte>
         </scelte>
     </evento>
 </eventi>
+
+
