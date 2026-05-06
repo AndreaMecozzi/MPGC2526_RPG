@@ -50,7 +50,7 @@ public class GameScreen extends BorderPane implements Musicabile {
         Media musica=new Media(path);
         musicaGioco=new MediaPlayer(musica);
         musicaGioco.setCycleCount(MediaPlayer.INDEFINITE);
-        musicaGioco.setVolume(0.5);
+        musicaGioco.setVolume(0.05);
     }
 
     @Override

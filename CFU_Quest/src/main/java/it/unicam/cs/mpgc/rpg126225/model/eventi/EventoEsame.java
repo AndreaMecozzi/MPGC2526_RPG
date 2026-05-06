@@ -1,6 +1,5 @@
 package it.unicam.cs.mpgc.rpg126225.model.eventi;
 
-import it.unicam.cs.mpgc.rpg126225.model.Opzione;
 import it.unicam.cs.mpgc.rpg126225.model.giocatore.Player;
 import java.util.List;
 

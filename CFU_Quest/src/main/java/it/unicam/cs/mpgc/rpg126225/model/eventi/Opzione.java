@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg126225.model;
+package it.unicam.cs.mpgc.rpg126225.model.eventi;
 
 /**
  * Rappresenta una scelta disponibile all'interno di un evento narrativo o accademico.

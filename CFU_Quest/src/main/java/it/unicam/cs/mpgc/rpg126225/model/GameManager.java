@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg126225.model;
 
 import it.unicam.cs.mpgc.rpg126225.model.eventi.Evento;
+import it.unicam.cs.mpgc.rpg126225.model.eventi.Opzione;
 import it.unicam.cs.mpgc.rpg126225.model.giocatore.Player;
 import it.unicam.cs.mpgc.rpg126225.persistence.Persistence;
 import it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence;

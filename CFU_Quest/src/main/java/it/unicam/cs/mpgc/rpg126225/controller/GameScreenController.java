@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg126225.controller;
 
 import it.unicam.cs.mpgc.rpg126225.model.GameManager;
-import it.unicam.cs.mpgc.rpg126225.model.Opzione;
+import it.unicam.cs.mpgc.rpg126225.model.eventi.Opzione;
 import it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence;
 import it.unicam.cs.mpgc.rpg126225.view.GameScreen;
 import it.unicam.cs.mpgc.rpg126225.view.MenuScreen;
@@ -46,25 +46,21 @@ public class GameScreenController {
                     this.gameManager.getPlayer().getNome());
             this.gameScreen.getTesto().setText(gameManager.getEventoAttuale().getStoria());
 
-            // Generazione dinamica dei bottoni
-            this.gameScreen.getContainerOpzioni().getChildren().clear(); // Rimuove i bottoni del vecchio evento
+            this.gameScreen.getContainerOpzioni().getChildren().clear();
 
             for (Opzione o : gameManager.getEventoAttuale().getOpzioni()) {
-                // Creiamo un bottone per ogni opzione disponibile nell'evento
                 Button btnScelta = gameScreen.creaBottone(o.testo());
 
                 btnScelta.setOnAction(e -> {
                     gameManager.eseguiTurno(o);
-                    // Salvataggio automatico per garantire la persistenza ad ogni passo [cite: 31]
                     try {
                         this.persistence.salvaPartita();
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-                    aggiornaDati(); // Ricarica la schermata con il nuovo evento
+                    aggiornaDati();
                 });
 
-                // Aggiungiamo il bottone al contenitore della View
                 this.gameScreen.getContainerOpzioni().getChildren().add(btnScelta);
             }
         }

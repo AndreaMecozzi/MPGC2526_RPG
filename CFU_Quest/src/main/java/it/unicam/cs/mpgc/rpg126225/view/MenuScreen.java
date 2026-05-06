@@ -44,7 +44,7 @@ public class MenuScreen extends Pane implements Musicabile{
         Media musica=new Media(path);
         musicaMenu=new MediaPlayer(musica);
         musicaMenu.setCycleCount(MediaPlayer.INDEFINITE);
-        musicaMenu.setVolume(0.5);
+        musicaMenu.setVolume(0.05);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg126225.persistence;
 
-import it.unicam.cs.mpgc.rpg126225.model.Opzione;
+import it.unicam.cs.mpgc.rpg126225.model.eventi.Opzione;
 import it.unicam.cs.mpgc.rpg126225.model.eventi.Evento;
 
 import java.io.IOException;
