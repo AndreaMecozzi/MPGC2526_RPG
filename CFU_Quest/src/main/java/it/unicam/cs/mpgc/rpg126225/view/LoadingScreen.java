@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
-public class LoadingScreen extends BorderPane {
+public class LoadingScreen extends BorderPane implements Screen{
     private final Font pressStart2p=
             Font.loadFont(getClass().getResourceAsStream("/fonts/PressStart2P.ttf"), 30);
 
@@ -24,6 +24,7 @@ public class LoadingScreen extends BorderPane {
         avviaAnimazione(nextScreen);
     }
 
+    @Override
     public void inizializza() {
         Label testo=new Label("Caricamento...");
         testo.setFont(pressStart2p);

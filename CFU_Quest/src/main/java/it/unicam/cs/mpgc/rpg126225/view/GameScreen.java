@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
 
 
 
-public class GameScreen extends BorderPane implements Musicabile {
+public class GameScreen extends BorderPane implements Screen, Musicabile {
 
     private GameScreenController gameScreenController;
 
@@ -39,8 +39,8 @@ public class GameScreen extends BorderPane implements Musicabile {
 
     public GameScreen() {
         this.setStyle("-fx-background-color: black;");
-        inizializza();
         inizializzaMusica();
+        inizializza();
         this.gameScreenController=new GameScreenController(this);
     }
 
@@ -58,6 +58,7 @@ public class GameScreen extends BorderPane implements Musicabile {
         musicaGioco.play();
     }
 
+    @Override
     public void inizializza(){
         /// Parte superiore della schermata
         inizializzaTop();

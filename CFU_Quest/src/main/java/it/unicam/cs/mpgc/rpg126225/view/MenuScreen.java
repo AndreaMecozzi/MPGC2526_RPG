@@ -14,7 +14,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 
 
-public class MenuScreen extends Pane implements Musicabile{
+public class MenuScreen extends Pane implements Screen, Musicabile{
 
     private MenuScreenController menuScreenController;
 
@@ -52,9 +52,17 @@ public class MenuScreen extends Pane implements Musicabile{
         musicaMenu.play();
     }
 
+    @Override
     public void inizializza(){
-        /// Creazione del titolo del Menu
-        // Bottone
+        this.inizializzaLogo();
+        this.inizializzaTitolo();
+        HBox containerTitle=this.inizializzaHboxTitolo();
+        this.inizializzaBottoni();
+        VBox containerButtons=this.inizializzaVBoxBottoni();
+        this.getChildren().addAll(containerTitle, containerButtons);
+    }
+
+    public void inizializzaLogo(){
         this.logoUnicam=new ImageView();
         Image logo=new Image(getClass().getResourceAsStream("/images/logo.png"));
         this.logoUnicam.setImage(logo);
@@ -62,19 +70,24 @@ public class MenuScreen extends Pane implements Musicabile{
         this.logoUnicam.setFitWidth(150);
         this.logoUnicam.setLayoutX(325);
         this.logoUnicam.setLayoutY(25);
+    }
 
-        // Titolo
+    public void inizializzaTitolo(){
         this.titolo=new Label("CFU QUEST");
         this.titolo.setFont(pressStart2pTitle);
         this.titolo.setStyle("-fx-text-fill: white;"+"-fx-background-color: black;");
+    }
 
+    public HBox inizializzaHboxTitolo(){
         HBox containerTitle=new HBox(35);
         containerTitle.getChildren().addAll(this.logoUnicam, this.titolo);
         containerTitle.setLayoutX(25);
         containerTitle.setLayoutY(25);
         containerTitle.setAlignment(Pos.CENTER_LEFT);
+        return containerTitle;
+    }
 
-        /// Creazione dei bottoni del menu
+    public void inizializzaBottoni(){
         this.newGame=creaBottone("Nuova partita");
         this.newGame.setOnAction(e -> menuScreenController.chiediNome());
 
@@ -89,15 +102,16 @@ public class MenuScreen extends Pane implements Musicabile{
 
         this.exit=creaBottone("Esci");
         exit.setOnAction(e->System.exit(0)); // "Torna al desktop"
+    }
 
+    public VBox inizializzaVBoxBottoni(){
         VBox containerButtons=new VBox(20);
         containerButtons.getChildren().addAll(this.newGame,this.loadGame,this.exit);
         containerButtons.setAlignment(Pos.CENTER);
         containerButtons.setPrefSize(300,300);
         containerButtons.setLayoutX(250);
         containerButtons.setLayoutY(200);
-
-        this.getChildren().addAll(containerTitle, containerButtons);
+        return containerButtons;
     }
 
     public Button creaBottone(String testo){

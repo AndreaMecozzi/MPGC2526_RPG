@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class InsertNameScreen extends BorderPane {
+public class InsertNameScreen extends BorderPane implements Screen {
     private InsertNameScreenController insertNameController;
     private final Font vt323text=Font.loadFont(
             getClass().getResourceAsStream("/fonts/vt323.ttf"), 30);
@@ -31,6 +31,7 @@ public class InsertNameScreen extends BorderPane {
         inizializza();
     }
 
+    @Override
     public void inizializza() {
         /// Label e TextField
         this.textLabel = new Label("Prima di cominciare la tua avventura,\ndovresti dirmi come ti chiami:");
