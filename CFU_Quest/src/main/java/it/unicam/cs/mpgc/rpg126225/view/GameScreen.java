@@ -71,52 +71,24 @@ public class GameScreen extends BorderPane implements Screen, Musicabile {
     }
 
     public void inizializzaTop(){
-        // Label CFU
-        this.cfuImage=new ImageView();
-        Image coin=new Image(this.getClass().getResource("/images/coin_CFU.png").toExternalForm());
-        this.cfuImage.setImage(coin);
-        this.cfuImage.setPreserveRatio(true);
-        this.cfuImage.setFitHeight(50);
-        this.cfuText=new Label("CFU: ");
-        this.cfuText.setFont(vt323Top);
-        this.cfuText.setStyle("-fx-text-fill: white;");
-        HBox hbCfu=new HBox();
-        hbCfu.getChildren().addAll(this.cfuImage,this.cfuText);
-        hbCfu.setAlignment(Pos.CENTER_LEFT);
+        this.inizializzaImmagineCfu();
+        this.inizializzaTestoCFU();
+        HBox hbCfu=this.inizializzaHboxCFU();
 
-        this.playerImage=new ImageView();
-        Image player=new Image(this.getClass().getResource("/images/player.png").toExternalForm());
-        this.playerImage.setImage(player);
-        this.playerImage.setPreserveRatio(true);
-        this.playerImage.setFitHeight(50);
-        this.playerText=new Label("Nome: ");
-        this.playerText.setFont(vt323Top);
-        this.playerText.setStyle("-fx-text-fill: white;");
-        HBox hbPlayer=new HBox();
-        hbPlayer.getChildren().addAll(this.playerImage,this.playerText);
-        hbPlayer.setAlignment(Pos.CENTER_LEFT);
+        this.inizializzaImmaginePlayer();
+        this.inizializzaTestoPlayer();
+        HBox hbPlayer=this.inizializzaHboxPlayer();
 
-        HBox hbCfuNome=new HBox(100);
-        hbCfuNome.setAlignment(Pos.CENTER_LEFT);
-        hbCfuNome.getChildren().addAll(hbCfu, hbPlayer);
+        this.inizializzaHboxCfuPlayer(hbCfu, hbPlayer);
 
-        // Label prossimo esame
-        this.esameImage=new ImageView();
-        Image libro=new Image(this.getClass().getResource("/images/libro.png").toExternalForm());
-        this.esameImage.setImage(libro);
-        this.esameImage.setPreserveRatio(true);
-        this.esameImage.setFitHeight(50);
-        this.prossimoEsameText=new Label("Prossimo Esame: Metodologie di programmazione");
-        this.prossimoEsameText.setFont(vt323Top);
-        this.prossimoEsameText.setStyle("-fx-text-fill: white;");
-        HBox hbLibroEsame=new HBox();
-        hbLibroEsame.getChildren().addAll(this.esameImage,this.prossimoEsameText);
-        hbLibroEsame.setAlignment(Pos.CENTER_LEFT);
+        HBox hbCfuNome=this.inizializzaHboxCfuPlayer(hbCfu, hbPlayer);
 
+        this.inizializzaImmagineEsame();
+        this.inizializzaTestoEsame();
 
-        VBox vbTop=new VBox();
-        vbTop.getChildren().addAll(hbCfuNome, hbLibroEsame);
-        vbTop.setPadding(new Insets(10,0,0,10));
+        HBox hbLibroEsame=this.inizializzaHboxEsame();
+
+        VBox vbTop=this.inizializzaVBoxSuperiore(hbCfuNome, hbLibroEsame);
 
         this.setTop(vbTop);
     }
@@ -207,6 +179,82 @@ public class GameScreen extends BorderPane implements Screen, Musicabile {
         return button;
     }
 
+    public void inizializzaImmagineCfu(){
+        this.cfuImage=new ImageView();
+        Image coin=new Image(this.getClass().getResource("/images/coin_CFU.png").toExternalForm());
+        this.cfuImage.setImage(coin);
+        this.cfuImage.setPreserveRatio(true);
+        this.cfuImage.setFitHeight(50);
+    }
+
+    public void inizializzaTestoCFU(){
+        this.cfuText=new Label("CFU: ");
+        this.cfuText.setFont(vt323Top);
+        this.cfuText.setStyle("-fx-text-fill: white;");
+    }
+
+    public HBox inizializzaHboxCFU(){
+        HBox hbCfu=new HBox();
+        hbCfu.getChildren().addAll(this.cfuImage,this.cfuText);
+        hbCfu.setAlignment(Pos.CENTER_LEFT);
+        return hbCfu;
+    }
+
+    public void inizializzaImmaginePlayer(){
+        this.playerImage=new ImageView();
+        Image player=new Image(this.getClass().getResource("/images/player.png").toExternalForm());
+        this.playerImage.setImage(player);
+        this.playerImage.setPreserveRatio(true);
+        this.playerImage.setFitHeight(50);
+    }
+
+    public void inizializzaTestoPlayer(){
+        this.playerText=new Label("Nome: ");
+        this.playerText.setFont(vt323Top);
+        this.playerText.setStyle("-fx-text-fill: white;");
+    }
+
+    public HBox inizializzaHboxPlayer(){
+        HBox hbPlayer=new HBox();
+        hbPlayer.getChildren().addAll(this.playerImage,this.playerText);
+        hbPlayer.setAlignment(Pos.CENTER_LEFT);
+        return hbPlayer;
+    }
+
+    public HBox inizializzaHboxCfuPlayer(HBox hbCfu, HBox hbPlayer){
+        HBox hbCfuNome=new HBox(100);
+        hbCfuNome.setAlignment(Pos.CENTER_LEFT);
+        hbCfuNome.getChildren().addAll(hbCfu, hbPlayer);
+        return hbCfuNome;
+    }
+
+    public void inizializzaImmagineEsame(){
+        this.esameImage=new ImageView();
+        Image libro=new Image(this.getClass().getResource("/images/libro.png").toExternalForm());
+        this.esameImage.setImage(libro);
+        this.esameImage.setPreserveRatio(true);
+        this.esameImage.setFitHeight(50);
+    }
+
+    public void inizializzaTestoEsame(){
+        this.prossimoEsameText=new Label("Prossimo Esame: Metodologie di programmazione");
+        this.prossimoEsameText.setFont(vt323Top);
+        this.prossimoEsameText.setStyle("-fx-text-fill: white;");
+    }
+
+    public HBox inizializzaHboxEsame(){
+        HBox hbLibroEsame=new HBox();
+        hbLibroEsame.getChildren().addAll(this.esameImage,this.prossimoEsameText);
+        hbLibroEsame.setAlignment(Pos.CENTER_LEFT);
+        return hbLibroEsame;
+    }
+
+    public VBox inizializzaVBoxSuperiore(HBox hbCfuNome, HBox hbLibroEsame){
+        VBox vbTop=new VBox();
+        vbTop.getChildren().addAll(hbCfuNome, hbLibroEsame);
+        vbTop.setPadding(new Insets(10,0,0,10));
+        return vbTop;
+    }
 
     public MediaPlayer getMusicaGioco() {
         return musicaGioco;
