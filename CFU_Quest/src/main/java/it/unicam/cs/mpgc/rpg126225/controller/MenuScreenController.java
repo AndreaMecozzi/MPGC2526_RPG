@@ -38,4 +38,9 @@ public class MenuScreenController {
         InsertNameScreen insertNameScreen=new InsertNameScreen();
         menuScreen.getScene().setRoot(insertNameScreen);
     }
+
+    public boolean esisteSalvataggio() {
+        // Deleghiamo il controllo alla classe persistence
+        return persistence.verificaEsistenzaSalvataggio();
+    }
 }

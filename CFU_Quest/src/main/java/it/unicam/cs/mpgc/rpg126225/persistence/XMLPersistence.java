@@ -231,4 +231,15 @@ public class XMLPersistence implements Persistence {
             return null;
         }
     }
+
+    /**
+     * Verifica se esiste un file di salvataggio precedentemente creato.
+     *
+     * @return true se il file di salvataggio esiste nel percorso specificato,
+     *         false altrimenti
+     */
+    @Override
+    public boolean verificaEsistenzaSalvataggio() {
+        return new java.io.File(FILE_SALVATAGGIO).exists();
+    }
 }

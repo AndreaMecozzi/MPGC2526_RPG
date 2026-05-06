@@ -48,11 +48,6 @@ public class MenuScreen extends Pane implements Screen, Musicabile{
     }
 
     @Override
-    public void avviaMusica() {
-        musicaMenu.play();
-    }
-
-    @Override
     public void inizializza(){
         this.inizializzaLogo();
         this.inizializzaTitolo();
@@ -93,10 +88,8 @@ public class MenuScreen extends Pane implements Screen, Musicabile{
 
         this.loadGame=creaBottone("Carica partita");
         java.io.File fileSalvataggio = new java.io.File("src/main/resources/persistence/salvataggio.xml");
-        if (!fileSalvataggio.exists()) {
-            this.loadGame.setDisable(true);
-            // Applichiamo uno stile grigio specifico per lo stato disabilitato
-            this.loadGame.setStyle("-fx-background-color: black; -fx-border-color: grey; -fx-text-fill: grey;");
+        if (!menuScreenController.esisteSalvataggio()) {
+            disabilitaBottone(this.loadGame);
         }
         this.loadGame.setOnAction(e -> menuScreenController.caricaPartita());
 
@@ -140,6 +133,16 @@ public class MenuScreen extends Pane implements Screen, Musicabile{
                 "-fx-text-fill: white;"));
 
         return button;
+    }
+
+    private void disabilitaBottone(Button bottone) {
+        bottone.setDisable(true);
+        bottone.setStyle("-fx-background-color: black; -fx-border-color: grey; -fx-text-fill: grey;");
+    }
+
+    @Override
+    public void avviaMusica() {
+        musicaMenu.play();
     }
 
     public MediaPlayer getMusicaMenu() {

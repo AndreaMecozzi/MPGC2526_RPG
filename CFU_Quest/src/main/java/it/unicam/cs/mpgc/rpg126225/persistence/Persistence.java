@@ -49,4 +49,12 @@ public interface Persistence {
      * @return Una lista di oggetti Opzione corrispondenti agli ID forniti.
      */
     public List<Opzione> getOpzioni(List<String> idOpzioni);
+
+    /**
+     * Verifica la presenza di dati di salvataggio persistenti.
+     *
+     * @return true se è presente un salvataggio valido,
+     *         false altrimenti.
+     */
+    public boolean verificaEsistenzaSalvataggio();
 }
