@@ -32,7 +32,7 @@ public interface Evento {
      *
      * @param opzione la scelta selezionata dal giocatore.
      * @param player  l'istanza del giocatore che effettua la scelta.
-     * @return una stringa che descrive l'esito della scelta o il passaggio narrativo successivo.
+     * @return L'identificativo del prossimo evento narrativo derivante dalla scelta.
      */
     public String eseguiOpzione(Opzione opzione, Player player);
 
