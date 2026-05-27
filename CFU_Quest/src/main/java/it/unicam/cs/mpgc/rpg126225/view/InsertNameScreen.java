@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg126225.view;
 
 import it.unicam.cs.mpgc.rpg126225.controller.InsertNameScreenController;
+import it.unicam.cs.mpgc.rpg126225.utils.RetroButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -64,11 +65,13 @@ public class InsertNameScreen extends BorderPane implements Screen {
         this.setCenter(containerCentrale);
 
         /// Bottoni
-        this.confirmButton = creaBottone("Conferma");
+        this.confirmButton = new RetroButton("Conferma", 30);
+        this.confirmButton.setPrefSize(200, 50);
         this.confirmButton.setOnAction(e->this.insertNameController.controllaNome());
 
 
-        this.backButton = creaBottone("Indietro");
+        this.backButton = new RetroButton("Indietro", 30);
+        this.backButton.setPrefSize(200, 50);
         this.backButton.setOnAction(e->this.insertNameController.tornaAlMenu());
 
         HBox containerBottoni = new HBox(40); // Spazio di 40px tra i due bottoni
@@ -77,36 +80,6 @@ public class InsertNameScreen extends BorderPane implements Screen {
         containerBottoni.getChildren().addAll(this.backButton, this.confirmButton);
 
         this.setBottom(containerBottoni);
-    }
-
-
-    public Button creaBottone(String testo){
-        //Struttura standard
-        Button button=new Button(testo);
-        button.setFont(vt323text);
-        button.setStyle("-fx-background-color: black;"+
-                "-fx-border-color: white;"+
-                "-fx-text-fill: white;");
-        button.setPrefSize(200,50);
-
-        // Animazione quando si preme il tasto
-        button.setOnMousePressed(e->button.setStyle("-fx-background-color: white;"+
-                "-fx-border-color: black;"+
-                "-fx-text-fill: black;"));
-        button.setOnMouseReleased(e->button.setStyle("-fx-background-color: black;"+
-                "-fx-border-color: white;"+
-                "-fx-text-fill: white;"));
-
-        // Animazione quando si passa sopra il bottone
-        button.setOnMouseEntered(e->button.setStyle("-fx-background-color: black;"+
-                "-fx-border-color: grey;"+
-                "-fx-text-fill: grey;"));
-        button.setOnMouseExited(e->button.setStyle("-fx-background-color: black;"+
-                "-fx-border-color: white;"+
-                "-fx-text-fill: white;"));
-        button.setWrapText(true);
-
-        return button;
     }
 
     public String getPlayerName(){

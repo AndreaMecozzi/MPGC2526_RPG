@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg126225.controller;
 import it.unicam.cs.mpgc.rpg126225.model.GameManager;
 import it.unicam.cs.mpgc.rpg126225.model.eventi.Opzione;
 import it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence;
+import it.unicam.cs.mpgc.rpg126225.utils.RetroButton;
 import it.unicam.cs.mpgc.rpg126225.view.GameScreen;
 import it.unicam.cs.mpgc.rpg126225.view.MenuScreen;
 import javafx.animation.PauseTransition;
@@ -49,7 +50,7 @@ public class GameScreenController {
             this.gameScreen.getContainerOpzioni().getChildren().clear();
 
             for (Opzione o : gameManager.getEventoAttuale().getOpzioni()) {
-                Button btnScelta = gameScreen.creaBottone(o.testo());
+                Button btnScelta = new RetroButton(o.testo());
 
                 btnScelta.setOnAction(e -> {
                     gameManager.eseguiTurno(o);

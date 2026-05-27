@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg126225.view;
 
 import it.unicam.cs.mpgc.rpg126225.controller.GameScreenController;
+import it.unicam.cs.mpgc.rpg126225.utils.RetroButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,14 +17,10 @@ import java.util.Objects;
 
 public class GameScreen extends BorderPane implements Screen, Musicabile {
 
-    private static final String STYLE_BASE = "-fx-background-color: black; -fx-border-color: white; -fx-text-fill: white;";
-    private static final String STYLE_HOVER = "-fx-background-color: black; -fx-border-color: grey; -fx-text-fill: grey;";
-    private static final String STYLE_PRESSED = "-fx-background-color: white; -fx-border-color: black; -fx-text-fill: black;";
     private static final String FONT_PATH = "/fonts/vt323.ttf";
 
     private final GameScreenController gameScreenController;
     private final Font vt323Top = Font.loadFont(getClass().getResourceAsStream(FONT_PATH), 30);
-    private final Font vt323button = Font.loadFont(getClass().getResourceAsStream(FONT_PATH), 20);
     
     private MediaPlayer musicaGioco;
     private Label cfuText, playerText, prossimoEsameText, testo;
@@ -77,7 +74,7 @@ public class GameScreen extends BorderPane implements Screen, Musicabile {
         this.containerOpzioni.setAlignment(Pos.CENTER);
         this.containerOpzioni.setPadding(new Insets(0, 0, 120, 0));
 
-        this.menuButton = creaBottone("Menu");
+        this.menuButton = new RetroButton("Menu");
 
         this.menuButton.setMinWidth(100); 
         this.menuButton.setPrefSize(100, 40);
@@ -106,23 +103,6 @@ public class GameScreen extends BorderPane implements Screen, Musicabile {
         HBox hb = new HBox(iv, label);
         hb.setAlignment(Pos.CENTER_LEFT);
         return hb;
-    }
-
-    public Button creaBottone(String testo) {
-        Button btn = new Button(testo);
-        btn.setFont(vt323button);
-        btn.setStyle(STYLE_BASE);
-        btn.setMinWidth(200);
-        btn.setMaxWidth(600);
-        btn.setAlignment(Pos.CENTER);
-        btn.setWrapText(true);
-
-        btn.setOnMousePressed(e -> btn.setStyle(STYLE_PRESSED));
-        btn.setOnMouseReleased(e -> btn.setStyle(STYLE_BASE));
-        btn.setOnMouseEntered(e -> btn.setStyle(STYLE_HOVER));
-        btn.setOnMouseExited(e -> btn.setStyle(STYLE_BASE));
-        
-        return btn;
     }
 
     public void inizializzaMusica() {
