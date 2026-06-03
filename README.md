@@ -7,8 +7,8 @@
 ## 🚀 Come eseguire il progetto
 
 ### Prerequisiti
-- Java 21 (LTS)
-- Gradle
+- Java 25 (LTS)
+- Gradle (9.1.0)
 
 ### Istruzioni
 
