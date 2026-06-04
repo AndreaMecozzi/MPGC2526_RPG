@@ -21,7 +21,7 @@ public class GameManager {
      * Restituisce l'istanza univoca del gestore del gioco.
      * Garantisce che esista un solo punto di controllo per la sessione corrente.
      *
-     * @return L'istanza Singleton di {@code GameManager}.
+     * @return L'istanza Singleton di GameManager.
      */
     public static GameManager getInstance(){
         if(instance == null){
