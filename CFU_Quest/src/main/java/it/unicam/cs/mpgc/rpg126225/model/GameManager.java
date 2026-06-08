@@ -19,7 +19,7 @@ public class GameManager {
     private static GameManager instance;
     private Player player;
     private Evento eventoAttuale;
-    private final Persistence persistenza = new XMLPersistence();
+    private Persistence persistenza;
 
     /**
      * Restituisce l'istanza univoca del gestore del gioco.
@@ -124,6 +124,15 @@ public class GameManager {
      */
     public void setEventoAttuale(Evento eventoAttuale) {
         this.eventoAttuale = eventoAttuale;
+    }
+
+    /**
+     * Configura il sistema di persistenza da utilizzare durante la durata del gioco
+     *
+     * @param persistenza il sistema di persistenza da utilizzare
+     */
+    public void setPersistenza(Persistence persistenza) {
+        this.persistenza = persistenza;
     }
 
     /**
