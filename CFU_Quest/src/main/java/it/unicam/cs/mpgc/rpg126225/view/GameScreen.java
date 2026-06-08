@@ -65,7 +65,7 @@ public class GameScreen extends BorderPane implements Screen, Musicabile {
 
         HBox hbTesto = new HBox(this.testo);
         hbTesto.setMaxWidth(700);
-        hbTesto.setPadding(new Insets(20, 0, 0, 0));
+        hbTesto.setPadding(new Insets(20, 0, 20, 0));
         this.setCenter(hbTesto);
     }
 
