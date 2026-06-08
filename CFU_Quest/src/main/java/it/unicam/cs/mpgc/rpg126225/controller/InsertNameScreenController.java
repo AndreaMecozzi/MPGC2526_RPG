@@ -1,7 +1,6 @@
 package it.unicam.cs.mpgc.rpg126225.controller;
 
-import it.unicam.cs.mpgc.rpg126225.persistence.Persistence;
-import it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence;
+import it.unicam.cs.mpgc.rpg126225.model.GameManager;
 import it.unicam.cs.mpgc.rpg126225.view.GameScreen;
 import it.unicam.cs.mpgc.rpg126225.view.InsertNameScreen;
 import it.unicam.cs.mpgc.rpg126225.view.LoadingScreen;
@@ -9,11 +8,11 @@ import it.unicam.cs.mpgc.rpg126225.view.MenuScreen;
 
 public class InsertNameScreenController {
     private InsertNameScreen insertNameScreen;
-    private Persistence persistence;
+    private GameManager gm;
 
     public InsertNameScreenController(InsertNameScreen insertNameScreen) {
         this.insertNameScreen = insertNameScreen;
-        this.persistence=new XMLPersistence();
+        this.gm = GameManager.getInstance();
     }
 
     public void tornaAlMenu(){
@@ -22,8 +21,8 @@ public class InsertNameScreenController {
         this.insertNameScreen.getScene().setRoot(menuScreen);
     }
 
-    public void nuovaPartita(String playerName){
-        this.persistence.nuovaPartita(playerName);
+    public void nuovaPartita(String nomeGiocatore){
+        gm.nuovaPartita(nomeGiocatore);
         vaiAlGioco();
     }
 

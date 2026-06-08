@@ -1,19 +1,18 @@
 package it.unicam.cs.mpgc.rpg126225.controller;
 
-import it.unicam.cs.mpgc.rpg126225.persistence.Persistence;
-import it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence;
+import it.unicam.cs.mpgc.rpg126225.model.GameManager;
 import it.unicam.cs.mpgc.rpg126225.view.GameScreen;
 import it.unicam.cs.mpgc.rpg126225.view.InsertNameScreen;
 import it.unicam.cs.mpgc.rpg126225.view.LoadingScreen;
 import it.unicam.cs.mpgc.rpg126225.view.MenuScreen;
 
 public class MenuScreenController {
-    public MenuScreen menuScreen;
-    public Persistence persistence;
+    private MenuScreen menuScreen;
+    private GameManager gm;
 
     public MenuScreenController(MenuScreen menuScreen) {
         this.menuScreen = menuScreen;
-        this.persistence=new XMLPersistence();
+        this.gm=GameManager.getInstance();
     }
 
     public void vaiAlGioco(){
@@ -26,7 +25,7 @@ public class MenuScreenController {
 
     public void caricaPartita(){
         try{
-            persistence.caricaPartita();
+            gm.caricaPartita();
             vaiAlGioco();
         }catch(Exception e){
             e.printStackTrace();
@@ -40,7 +39,6 @@ public class MenuScreenController {
     }
 
     public boolean esisteSalvataggio() {
-        // Deleghiamo il controllo alla classe persistence
-        return persistence.verificaEsistenzaSalvataggio();
+        return this.gm.verificaEsistenzaSalvataggio();
     }
 }

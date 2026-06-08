@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg126225.persistence;
 
+import it.unicam.cs.mpgc.rpg126225.GameState;
 import it.unicam.cs.mpgc.rpg126225.model.*;
 import it.unicam.cs.mpgc.rpg126225.model.eventi.*;
 import it.unicam.cs.mpgc.rpg126225.model.giocatore.Player;
@@ -40,35 +41,13 @@ public class XMLPersistence implements Persistence {
     public XMLPersistence() {}
 
     /**
-     * Inizializza una nuova partita resettando lo stato nel GameManager e
-     * sovrascrivendo il precedente file di salvataggio.
-     * @param playerName Il nome dello studente inserito dall'utente.
-     */
-    @Override
-    public void nuovaPartita(String playerName) {
-        GameManager gm = GameManager.getInstance();
-
-        Player p = new Studente(playerName);
-        p.aggiungiCfu(0);
-        p.cambiaProssimoEsame("Programmazione");
-        gm.setPlayer(p);
-
-        gm.setEventoAttuale(getEvento("EVT_INIZIO_01"));
-
-        try {
-            salvaPartita();
-        } catch (IOException e) {
-            System.err.println("Errore durante la creazione del file di salvataggio: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Carica i dati dal file di salvataggio e ripristina la sessione
-     * all'interno del GameManager
+     * Carica i dati dal file di salvataggio e restituisce lo stato del gioco.
+     *
+     * @return GameState: i dati caricati dal file di salvataggio
      * @throws IOException Se il file di salvataggio è mancante, illeggibile o corrotto.
      */
     @Override
-    public void caricaPartita() throws IOException {
+    public GameState caricaPartita() throws IOException {
         Document doc = loadDocument(FILE_SALVATAGGIO);
         if (doc == null) throw new IOException("File di salvataggio non trovato.");
 
@@ -77,27 +56,23 @@ public class XMLPersistence implements Persistence {
         String prossimoEsame = doc.getElementsByTagName("prossimoEsame").item(0).getTextContent();
         String idEventoAttuale = doc.getElementsByTagName("idEventoAttuale").item(0).getTextContent();
 
-        GameManager gm = GameManager.getInstance();
-
-        Player p = new Studente(nome);
-        p.aggiungiCfu(cfu);
-        p.cambiaProssimoEsame(prossimoEsame);
-        gm.setPlayer(p);
-
-        gm.setEventoAttuale(getEvento(idEventoAttuale));
+        Player p = new Studente(nome, cfu, prossimoEsame);
+        return new GameState(p, idEventoAttuale);
     }
 
     /**
-     * Serializza l'attuale stato del GameManager in formato XML per il salvataggio
-     * della partita
+     * Serializza i dati del giocatore e dell'evento passati come parametro in formato XML
+     * per il salvataggio della partita.
+     *
+     * @param player l'istanza del giocatore
+     * @param eventoAttuale l'evento in cui si trova attualmente il giocatore
      * @throws IOException Se si verificano errori nei permessi di scrittura o durante
      * la trasformazione dell'albero DOM.
      */
     @Override
-    public void salvaPartita() throws IOException {
-        GameManager gm = GameManager.getInstance();
-        Player p = gm.getPlayer();
-        Evento attuale = gm.getEventoAttuale();
+    public void salvaPartita(Player player, Evento eventoAttuale) throws IOException {
+        Player p = player;
+        Evento attuale = eventoAttuale;
 
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

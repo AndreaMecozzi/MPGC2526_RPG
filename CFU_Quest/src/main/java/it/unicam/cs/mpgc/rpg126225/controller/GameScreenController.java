@@ -2,7 +2,6 @@ package it.unicam.cs.mpgc.rpg126225.controller;
 
 import it.unicam.cs.mpgc.rpg126225.model.GameManager;
 import it.unicam.cs.mpgc.rpg126225.model.eventi.Opzione;
-import it.unicam.cs.mpgc.rpg126225.persistence.XMLPersistence;
 import it.unicam.cs.mpgc.rpg126225.utils.RetroButton;
 import it.unicam.cs.mpgc.rpg126225.view.GameScreen;
 import it.unicam.cs.mpgc.rpg126225.view.MenuScreen;
@@ -13,7 +12,6 @@ import javafx.util.Duration;
 public class GameScreenController {
     private GameScreen gameScreen;
     private GameManager gameManager;
-    private final XMLPersistence persistence=new XMLPersistence();
 
     public GameScreenController(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
@@ -55,7 +53,7 @@ public class GameScreenController {
                 btnScelta.setOnAction(e -> {
                     gameManager.eseguiTurno(o);
                     try {
-                        this.persistence.salvaPartita();
+                        gameManager.salvaPartita();
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

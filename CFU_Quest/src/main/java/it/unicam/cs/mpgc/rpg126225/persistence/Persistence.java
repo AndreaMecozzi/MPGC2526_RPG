@@ -1,7 +1,9 @@
 package it.unicam.cs.mpgc.rpg126225.persistence;
 
+import it.unicam.cs.mpgc.rpg126225.GameState;
 import it.unicam.cs.mpgc.rpg126225.model.eventi.Opzione;
 import it.unicam.cs.mpgc.rpg126225.model.eventi.Evento;
+import it.unicam.cs.mpgc.rpg126225.model.giocatore.Player;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,25 +17,23 @@ import java.util.List;
 public interface Persistence {
 
     /**
-     * Crea un nuovo profilo o sovrascrive i dati temporanei precedenti,
-     * impostando il nome del nuovo protagonista.
-     * @param playerName Il nome inserito dal giocatore all'inizio dell'avventura.
-     */
-    public void nuovaPartita(String playerName);
-
-    /**
      * Carica in memoria lo stato del gioco da un salvataggio precedente.
+     *
+     * @return GameState i dati caricati dal salvataggio
      * @throws IOException Se si verifica un errore durante la lettura
      * dal supporto fisico (es. file non trovato o corrotto).
      */
-    public void caricaPartita() throws IOException;
+    public GameState caricaPartita() throws IOException;
 
     /**
      * Salva lo stato attuale della sessione di gioco sul supporto di memorizzazione.
+     *
+     * @param player l'istanza del giocatore
+     * @param eventoAttuale l'evento in cui si trova attualmente il giocatore
      * @throws IOException Se si verifica un errore durante la scrittura
      * sul supporto fisico (es. permessi negati o spazio esaurito).
      */
-    public void salvaPartita() throws IOException;
+    public void salvaPartita(Player player, Evento eventoAttuale) throws IOException;
 
     /**
      * Recupera la struttura completa di un evento narrativo o accademico
