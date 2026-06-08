@@ -31,7 +31,7 @@ public interface Player {
     public void aggiungiCfu(int cfu);
 
     /**
-     * Restituisce il nomedel prossimo esame che il giocatore deve sostenere
+     * Restituisce il nome del prossimo esame che il giocatore deve sostenere
      * per proseguire nella storia.
      *
      * @return una stringa che rappresenta l'esame obiettivo corrente.

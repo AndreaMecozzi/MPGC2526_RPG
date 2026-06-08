@@ -21,7 +21,7 @@ public interface Evento {
     /**
      * Restituisce la lista delle opzioni (scelte) disponibili per l'utente in questo evento.
      *
-     * @return una lista di oggetti {@link Opzione}.
+     * @return una lista di opzioni.
      */
     public List<Opzione> getOpzioni();
 

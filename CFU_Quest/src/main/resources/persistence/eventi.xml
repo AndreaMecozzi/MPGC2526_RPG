@@ -2,7 +2,7 @@
 <eventi>
     <!-- FASE 1: INIZIO E PRIMO IMPATTO -->
     <evento id="EVT_INIZIO_01" tipo="STORIA">
-        <descrizione>Sei appena arrivato al polo informatico dell'Unicam. Il corso di MPGC sta per iniziare. Cosa decidi di fare?</descrizione>
+        <descrizione>Sei appena arrivato al polo informatico dell'Unicam. Il corso di Programmazione sta per iniziare. Cosa decidi di fare?</descrizione>
         <scelte>
             <scelta>OPT_001</scelta>
             <scelta>OPT_002</scelta>
@@ -79,11 +79,11 @@
         </scelte>
         <idSceltaCorretta>OPT_EX_PROG_01</idSceltaCorretta>
         <cfu>6</cfu>
-        <prossimoEsame>Progetto di Laboratorio</prossimoEsame>
+        <prossimoEsame>Metodologie di programmazione</prossimoEsame>
     </evento>
 
     <evento id="EVT_POST_ESAME_01" tipo="STORIA">
-        <descrizione>Hai superato il primo scoglio! Ma non c'è tempo per riposare, inizia il laboratorio.</descrizione>
+        <descrizione>Hai superato il primo scoglio! Ma non c'è tempo per riposare, devi lavorare per il progetto di Metodologie di programmazione.</descrizione>
         <scelte>
             <scelta>OPT_021</scelta>
             <scelta>OPT_022</scelta>
@@ -119,7 +119,7 @@
     </evento>
 
     <evento id="EVT_ESAME_02" tipo="ESAME">
-        <descrizione>Secondo esame: Cos'è il Polimorfismo in Java?</descrizione>
+        <descrizione>Secondo esame: Cosa sono gli Stream in Java?</descrizione>
         <scelte>
             <scelta>OPT_EX_MPGC_01</scelta>
             <scelta>OPT_EX_MPGC_02</scelta>
@@ -193,7 +193,7 @@
     </evento>
 
     <evento id="EVT_FAIL_MPGC" tipo="STORIA">
-        <descrizione>Risposta errata! Il concetto di polimorfismo è fondamentale e non l'hai centrato. La commissione ti invita a ripresentarti al prossimo appello.</descrizione>
+        <descrizione>Risposta errata! Gli Stream in Java sono un concetto chiave e non l'hai centrato. La commissione ti invita a ripresentarti al prossimo appello.</descrizione>
         <scelte>
             <scelta>OPT_FAIL_02</scelta>
         </scelte>

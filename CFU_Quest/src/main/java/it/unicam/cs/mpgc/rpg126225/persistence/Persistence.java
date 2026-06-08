@@ -28,7 +28,7 @@ public interface Persistence {
     /**
      * Salva lo stato attuale della sessione di gioco sul supporto di memorizzazione.
      *
-     * @param player l'istanza del giocatore
+     * @param player        l'istanza del giocatore
      * @param eventoAttuale l'evento in cui si trova attualmente il giocatore
      * @throws IOException Se si verifica un errore durante la scrittura
      * sul supporto fisico (es. permessi negati o spazio esaurito).

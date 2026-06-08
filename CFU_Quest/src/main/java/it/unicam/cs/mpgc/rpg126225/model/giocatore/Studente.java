@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg126225.model.giocatore;
 
 /**
- * Rappresenta l'implementazione concreta del protagonista (lo studente) all'interno del gioco.
+ * Rappresenta l'implementazione concreta del protagonista all'interno del gioco.
  *
  * @author Andrea Mecozzi
  */

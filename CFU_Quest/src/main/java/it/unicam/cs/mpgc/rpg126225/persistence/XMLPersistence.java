@@ -64,7 +64,7 @@ public class XMLPersistence implements Persistence {
      * Serializza i dati del giocatore e dell'evento passati come parametro in formato XML
      * per il salvataggio della partita.
      *
-     * @param player l'istanza del giocatore
+     * @param player        l'istanza del giocatore
      * @param eventoAttuale l'evento in cui si trova attualmente il giocatore
      * @throws IOException Se si verificano errori nei permessi di scrittura o durante
      * la trasformazione dell'albero DOM.

@@ -130,7 +130,7 @@
 
     <!-- OPZIONI FASE 4 (Esame 2: Corretta in 2ª posizione) -->
     <opzione id="OPT_029">
-        <testo>Ripassa il polimorfismo e l'ereditarietà</testo>
+        <testo>Ripassa gli Stream e la programmazione funzionale</testo>
         <idProssimoEvento>EVT_ESAME_02</idProssimoEvento>
     </opzione>
     <opzione id="OPT_030">
@@ -139,19 +139,19 @@
     </opzione>
 
     <opzione id="OPT_EX_MPGC_02">
-        <testo>L'utilizzo di più file sorgente per un progetto</testo>
+        <testo>Flussi di dati binari per la lettura e scrittura di file su disco</testo>
         <idProssimoEvento>EVT_FAIL_MPGC</idProssimoEvento>
     </opzione>
     <opzione id="OPT_EX_MPGC_01">
-        <testo>Capacità di un oggetto di assumere più forme</testo>
+        <testo>Sequenze di elementi su cui applicare operazioni funzionali come filter, map e reduce</testo>
         <idProssimoEvento>EVT_POST_ESAME_02</idProssimoEvento>
     </opzione>
     <opzione id="OPT_EX_MPGC_03">
-        <testo>La creazione di più istanze della stessa classe</testo>
+        <testo>Thread paralleli che eseguono operazioni in background</testo>
         <idProssimoEvento>EVT_FAIL_MPGC</idProssimoEvento>
     </opzione>
     <opzione id="OPT_EX_MPGC_04">
-        <testo>La possibilità di ereditare da più classi contemporaneamente</testo>
+        <testo>Strutture dati simili alle liste con accesso casuale agli elementi</testo>
         <idProssimoEvento>EVT_FAIL_MPGC</idProssimoEvento>
     </opzione>
 
@@ -228,7 +228,7 @@
         <idProssimoEvento>EVT_STUDIO_01</idProssimoEvento>
     </opzione>
     <opzione id="OPT_FAIL_02">
-        <testo>Rivedi la teoria sul polimorfismo</testo>
+        <testo>Rivedi la teoria sugli Stream in Java</testo>
         <idProssimoEvento>EVT_STUDIO_02</idProssimoEvento>
     </opzione>
     <opzione id="OPT_FAIL_03">
