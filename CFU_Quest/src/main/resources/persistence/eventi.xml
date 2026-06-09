@@ -2,7 +2,7 @@
 <eventi>
     <!-- FASE 1: INIZIO E PRIMO IMPATTO -->
     <evento id="EVT_INIZIO_01" tipo="STORIA">
-        <descrizione>Sei appena arrivato al polo informatico dell'Unicam. Il corso di Programmazione sta per iniziare. Cosa decidi di fare?</descrizione>
+        <descrizione>Sei appena arrivato al polo informatico dell'Unicam. Il corso di Programmazione sta per iniziare. Cosa fai?</descrizione>
         <scelte>
             <scelta>OPT_001</scelta>
             <scelta>OPT_002</scelta>
